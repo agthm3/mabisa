@@ -40,6 +40,7 @@ Route::put('/dashboard/profile', [DashboardProfileController::class, 'update'])-
 Route::get('/dashboard/indikator', [DashboardIndikatorController::class, 'index'])->name('dashboard.indikator.index');
 
 Route::get('/dashboard/user', [DashboardUserManajemenController::class, 'index'])->name('dashboard.user.index');
+Route::post('/dashboard/user/{user}/role', [DashboardUserManajemenController::class, 'updateRole'])->name('dashboard.user.updateRole');
 
 Route::get('/dashboard/verification', [DashboardVerificationEvidence::class, 'index'])->name('dashboard.verification.index');
 Route::get('/dashboard/verification/show', [DashboardVerificationEvidence::class, 'show'])->name('dashboard.verification.show');
