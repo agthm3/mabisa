@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <title>Profil Pengguna — MABISA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Halaman profil pengguna MABISA — pengaturan data diri, akun, dan preferensi notifikasi."
+  />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            mabisa: {
+              50: '#fdf5f5',
+              100: '#fae5e6',
+              200: '#f3c7ca',
+              300: '#e89aa0',
+              400: '#d86872',
+              500: '#b1333f',  // maroon utama
+              600: '#8f2633',
+              700: '#6e1d28',
+              800: '#4a151d',
+              900: '#2e0e14',
+            },
+          },
+          boxShadow: {
+            soft: '0 18px 45px rgba(15,23,42,0.08)',
+          },
+          borderRadius: {
+            '3xl': '1.75rem',
+          },
+        },
+      },
+    };
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-900">
+  <!-- Background lembut -->
+  <div class="pointer-events-none fixed inset-0 -z-10">
+    <div class="absolute -top-32 -right-16 h-72 w-72 rounded-full bg-mabisa-100 opacity-70 blur-3xl"></div>
+    <div class="absolute -bottom-32 -left-20 h-80 w-80 rounded-full bg-mabisa-50 opacity-80 blur-3xl"></div>
+  </div>
+
+  <div class="flex min-h-screen">
+    <!-- SIDEBAR -->
+    <aside
+      id="sidebar"
+      class="fixed inset-y-0 left-0 z-30 flex w-64 flex-col border-r border-slate-200 bg-white px-4 py-4 shadow-soft transition-transform duration-200 md:static md:translate-x-0"
+    >
+      <!-- Logo + close (mobile) -->
+      <div class="mb-6 flex items-center justify-between gap-2">
+        <div class="flex items-center gap-3">
+          <div class="flex h-9 w-9 items-center justify-center rounded-2xl bg-mabisa-500 text-white shadow-soft">
+            <span class="text-xs font-semibold tracking-tight">MB</span>
+          </div>
+          <div class="leading-tight">
+            <p class="text-sm font-semibold tracking-tight text-slate-900">MABISA</p>
+            <p class="text-[11px] text-slate-500">Makassar Bukti &amp; Insentif</p>
+          </div>
+        </div>
+        <button
+          id="sidebar-close"
+          class="rounded-lg border border-slate-200 bg-slate-50 p-1 text-slate-600 md:hidden"
+        >
+          ✕
+        </button>
+      </div>
+
+      <!-- Info user singkat -->
+      <div class="mb-4 rounded-2xl border border-slate-200 bg-slate-50 p-3 text-xs">
+        <div class="flex items-center gap-3">
+          <div id="avatarPreview" class="flex h-9 w-9 items-center justify-center rounded-full bg-mabisa-50 text-mabisa-700 text-xs font-semibold">
+            AG
+          </div>
+          <div class="flex-1">
+            <p class="text-[13px] font-semibold text-slate-900">Andi Gigatera</p>
+            <p class="text-[11px] text-slate-500">Admin Kota • BRIDA Makassar</p>
+          </div>
+        </div>
+        <div class="mt-2 flex items-center justify-between text-[11px] text-slate-500">
+          <span>Login sebagai: Admin</span>
+          <span class="rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-medium text-emerald-600">
+            Online
+          </span>
+        </div>
+      </div>
+
+      <!-- MENU UTAMA -->
+      <nav class="flex-1 space-y-5 text-sm">
+        <div>
+          <p class="mb-1 px-2 text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+            Navigasi
+          </p>
+          <ul class="space-y-1">
+            <li>
+              <a
+                href="#"
+                class="flex items-center gap-2 rounded-xl px-3 py-2 text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+              >
+                <span>📊</span>
+                <span>Dashboard Utama</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="flex items-center gap-2 rounded-xl bg-mabisa-50 px-3 py-2 font-medium text-mabisa-700"
+              >
+                <span>👤</span>
+                <span>Profil</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#indikator"
+                class="flex items-center gap-2 rounded-xl px-3 py-2 text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+              >
+                <span>📌</span>
+                <span>Indikator Manajemen</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="mb-1 px-2 text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+            Operasional
+          </p>
+          <ul class="space-y-1">
+            <li>
+              <a
+                href="#"
+                class="flex items-center gap-2 rounded-xl px-3 py-2 text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+              >
+                <span>📷</span>
+                <span>Bukti RT/RW</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="flex items-center gap-2 rounded-xl px-3 py-2 text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+              >
+                <span>✅</span>
+                <span>Verifikasi &amp; Insentif</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="flex items-center gap-2 rounded-xl px-3 py-2 text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+              >
+                <span>🕒</span>
+                <span>Log Aktivitas</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="mb-1 px-2 text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+            Sistem
+          </p>
+          <ul class="space-y-1">
+            <li>
+              <a
+                href="#"
+                class="flex items-center justify-between rounded-xl px-3 py-2 text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+              >
+                <span class="flex items-center gap-2">
+                  <span>⚙️</span>
+                  <span>Pengaturan Sistem</span>
+                </span>
+                <span class="rounded-full bg-mabisa-50 px-2 py-0.5 text-[10px] text-mabisa-700">Admin</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Footer sidebar -->
+      <div class="mt-4 border-t border-slate-200 pt-3 text-[11px] text-slate-500">
+        <p>Bagian dari ekosistem <span class="font-semibold text-slate-800">SIGAP BRIDA</span>.</p>
+        <button
+          class="mt-2 inline-flex items-center gap-1 rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-1 text-[11px] text-slate-700"
+        >
+          ↪ Kembali ke SIGAP
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="flex flex-1 flex-col">
+      <!-- TOP BAR -->
+      <header class="sticky top-0 z-20 border-b border-slate-200 bg-white/80 backdrop-blur-md">
+        <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+          <div>
+            <p class="text-xs font-medium uppercase tracking-wider text-slate-500">
+              Profil Pengguna
+            </p>
+            <h1 class="text-lg font-semibold text-slate-900">
+              Pengaturan akun &amp; identitas di MABISA
+            </h1>
+          </div>
+          <div class="flex items-center gap-2">
+            <button
+              class="hidden items-center gap-1 rounded-xl border border-slate-200 bg-white px-3 py-1.5 text-xs text-slate-700 hover:border-mabisa-200 hover:bg-mabisa-50/60 md:inline-flex"
+            >
+              💾 Simpan Perubahan
+            </button>
+            <button
+              id="sidebar-open"
+              class="inline-flex items-center rounded-lg border border-slate-200 bg-white p-1.5 text-slate-700 md:hidden"
+            >
+              ☰
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- CONTENT -->
+      <main class="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-8 px-4 py-6">
+        <!-- SECTION: Header profil + avatar -->
+        <section class="grid gap-6 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+          <!-- Avatar & info singkat -->
+          <div class="rounded-3xl border border-slate-200 bg-white p-4 shadow-soft/40">
+            <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+              Identitas utama
+            </p>
+            <div class="mt-3 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+              <div class="relative">
+                <div
+                  id="avatarLarge"
+                  class="flex h-20 w-20 items-center justify-center rounded-full bg-mabisa-50 text-lg font-semibold text-mabisa-700"
+                >
+                  AG
+                </div>
+                <label
+                  class="absolute bottom-0 right-0 flex h-7 w-7 cursor-pointer items-center justify-center rounded-full border border-white bg-mabisa-500 text-xs text-white shadow-soft"
+                  title="Ubah foto"
+                >
+                  ✎
+                  <input id="avatarInput" type="file" accept="image/*" class="hidden" />
+                </label>
+              </div>
+              <div class="space-y-1 text-sm">
+                <p class="text-base font-semibold text-slate-900">Andi Gigatera Halil M.</p>
+                <p class="text-xs text-slate-600">Badan Riset dan Inovasi Daerah Kota Makassar</p>
+                <div class="flex flex-wrap items-center gap-2 text-[11px] text-slate-500">
+                  <span class="rounded-full bg-mabisa-50 px-2.5 py-0.5 font-medium text-mabisa-700">
+                    Peran: Admin Kota
+                  </span>
+                  <span class="rounded-full bg-slate-50 px-2.5 py-0.5">
+                    Level akses: Kinerja &amp; Insentif Kota
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 grid gap-2 text-xs sm:grid-cols-2">
+              <div class="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2">
+                <p class="text-[11px] text-slate-500">Terakhir login</p>
+                <p class="text-slate-800">18 November 2025 • 09.41 WITA</p>
+              </div>
+              <div class="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2">
+                <p class="text-[11px] text-slate-500">Status akun</p>
+                <p class="text-emerald-600">Aktif • Terverifikasi</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Data diri utama -->
+          <div class="rounded-3xl border border-slate-200 bg-white p-4 shadow-soft/40">
+            <div class="mb-3 flex items-center justify-between gap-2">
+              <div>
+                <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+                  Data diri
+                </p>
+                <p class="text-sm font-semibold text-slate-900">Informasi yang tampil di sistem</p>
+              </div>
+            </div>
+
+            <div class="grid gap-3 text-xs sm:grid-cols-2">
+              <div class="space-y-1.5">
+                <label class="block text-[11px] font-medium text-slate-600">Nama lengkap</label>
+                <input
+                  type="text"
+                  class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-800 focus:border-mabisa-300 focus:outline-none focus:ring-1 focus:ring-mabisa-200"
+                  value="Andi Gigatera Halil M."
+                />
+              </div>
+              <div class="space-y-1.5">
+                <label class="block text-[11px] font-medium text-slate-600">NIP/NIK (opsional)</label>
+                <input
+                  type="text"
+                  class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-800 focus:border-mabisa-300 focus:outline-none focus:ring-1 focus:ring-mabisa-200"
+                  placeholder="Masukkan NIP/NIK bila digunakan sebagai referensi"
+                />
+              </div>
+              <div class="space-y-1.5">
+                <label class="block text-[11px] font-medium text-slate-600">Unit kerja</label>
+                <input
+                  type="text"
+                  class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-800 focus:border-mabisa-300 focus:outline-none focus:ring-1 focus:ring-mabisa-200"
+                  value="BRIDA Kota Makassar"
+                />
+              </div>
+              <div class="space-y-1.5">
+                <label class="block text-[11px] font-medium text-slate-600">Jabatan</label>
+                <input
+                  type="text"
+                  class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-800 focus:border-mabisa-300 focus:outline-none focus:ring-1 focus:ring-mabisa-200"
+                  value="Admin MABISA • Pengelola Data"
+                />
+              </div>
+              <div class="space-y-1.5">
+                <label class="block text-[11px] font-medium text-slate-600">No. HP</label>
+                <input
+                  type="tel"
+                  class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-800 focus:border-mabisa-300 focus:outline-none focus:ring-1 focus:ring-mabisa-200"
+                  placeholder="08xxxxxxxxxx"
+                />
+              </div>
+              <div class="space-y-1.5">
+                <label class="block text-[11px] font-medium text-slate-600">Alamat kantor</label>
+                <input
+                  type="text"
+                  class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-800 focus:border-mabisa-300 focus:outline-none focus:ring-1 focus:ring-mabisa-200"
+                  placeholder="Jl. ...."
+                />
+              </div>
+            </div>
+
+            <div class="mt-3 flex flex-wrap gap-2 text-[11px]">
+              <button
+                class="rounded-xl border border-slate-200 bg-slate-50 px-3 py-1.5 text-slate-700 hover:border-mabisa-200 hover:bg-mabisa-50/60"
+              >
+                Simpan data diri
+              </button>
+              <button
+                class="rounded-xl border border-slate-200 bg-white px-3 py-1.5 text-slate-500 hover:bg-slate-50"
+              >
+                Batalkan perubahan
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION: Akun & peran -->
+        <section class="grid gap-6 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+          <!-- Akun login -->
+          <div class="rounded-3xl border border-slate-200 bg-white p-4 shadow-soft/40">
+            <div class="mb-3 flex items-center justify-between gap-2">
+              <div>
+                <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+                  Akun MABISA
+                </p>
+                <p class="text-sm font-semibold text-slate-900">Email &amp; password</p>
+              </div>
+            </div>
+            <div class="space-y-3 text-xs">
+              <div class="space-y-1.5">
+                <label class="block text-[11px] font-medium text-slate-600">Email login</label>
+                <input
+                  type="email"
+                  class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-800 focus:border-mabisa-300 focus:outline-none focus:ring-1 focus:ring-mabisa-200"
+                  value="andi.gigatera@makassarkota.go.id"
+                />
+              </div>
+              <div class="grid gap-3 sm:grid-cols-2">
+                <div class="space-y-1.5">
+                  <label class="block text-[11px] font-medium text-slate-600">Password baru</label>
+                  <input
+                    type="password"
+                    class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-800 focus:border-mabisa-300 focus:outline-none focus:ring-1 focus:ring-mabisa-200"
+                    placeholder="Kosongkan jika tidak diubah"
+                  />
+                </div>
+                <div class="space-y-1.5">
+                  <label class="block text-[11px] font-medium text-slate-600">Ulangi password baru</label>
+                  <input
+                    type="password"
+                    class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-800 focus:border-mabisa-300 focus:outline-none focus:ring-1 focus:ring-mabisa-200"
+                    placeholder="Ulangi password baru"
+                  />
+                </div>
+              </div>
+              <p class="text-[11px] text-slate-500">
+                Password minimal 8 karakter, disarankan kombinasi huruf besar-kecil, angka, dan simbol.
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <button
+                  class="rounded-xl bg-mabisa-500 px-3.5 py-1.5 text-[11px] font-semibold text-white hover:bg-mabisa-600"
+                >
+                  Simpan pengaturan akun
+                </button>
+                <button
+                  class="rounded-xl border border-slate-200 bg-white px-3.5 py-1.5 text-[11px] text-slate-600 hover:bg-slate-50"
+                >
+                  Kirim tautan reset ke email
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Peran & hak akses -->
+          <div class="rounded-3xl border border-slate-200 bg-white p-4 shadow-soft/40">
+            <div class="mb-3 flex items-center justify-between gap-2">
+              <div>
+                <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+                  Peran &amp; hak akses
+                </p>
+                <p class="text-sm font-semibold text-slate-900">
+                  Apa saja yang bisa dilakukan di MABISA
+                </p>
+              </div>
+              <span class="rounded-full bg-mabisa-50 px-3 py-1 text-[11px] font-medium text-mabisa-700">
+                Peran: Admin Kota
+              </span>
+            </div>
+            <div class="grid gap-3 text-xs sm:grid-cols-2">
+              <div class="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2">
+                <p class="font-semibold text-slate-900">Akses data</p>
+                <ul class="mt-1 space-y-0.5 text-slate-700">
+                  <li>• Lihat rekap semua kelurahan.</li>
+                  <li>• Lihat status insentif seluruh RT/RW.</li>
+                  <li>• Akses laporan triwulan &amp; tahunan.</li>
+                </ul>
+              </div>
+              <div class="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2">
+                <p class="font-semibold text-slate-900">Hak pengelolaan</p>
+                <ul class="mt-1 space-y-0.5 text-slate-700">
+                  <li>• Atur periode penilaian.</li>
+                  <li>• Kelola indikator kinerja.</li>
+                  <li>• Export data untuk SIGAP/SIPD.</li>
+                </ul>
+              </div>
+            </div>
+            <p class="mt-3 text-[11px] text-slate-500">
+              Perubahan peran &amp; level akses hanya dapat dilakukan oleh super admin/otoritas yang ditunjuk. Jika ada ketidaksesuaian, hubungi
+              admin utama SIGAP BRIDA.
+            </p>
+          </div>
+        </section>
+
+        <!-- SECTION: Preferensi & keamanan -->
+        <section class="grid gap-6 md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
+          <!-- Notifikasi -->
+          <div class="rounded-3xl border border-slate-200 bg-white p-4 shadow-soft/40">
+            <div class="mb-3 flex items-center justify-between gap-2">
+              <div>
+                <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+                  Preferensi notifikasi
+                </p>
+                <p class="text-sm font-semibold text-slate-900">
+                  Apa saja yang ingin Anda dapatkan
+                </p>
+              </div>
+            </div>
+            <div class="space-y-3 text-xs">
+              <label class="flex items-start gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2">
+                <input type="checkbox" class="mt-0.5" checked />
+                <div>
+                  <p class="font-semibold text-slate-900">Notifikasi email</p>
+                  <p class="text-[11px] text-slate-600">
+                    Dapatkan ringkasan berkala (mingguan/bulanan) tentang status bukti &amp; insentif.
+                  </p>
+                </div>
+              </label>
+              <label class="flex items-start gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2">
+                <input type="checkbox" class="mt-0.5" checked />
+                <div>
+                  <p class="font-semibold text-slate-900">Notifikasi penting</p>
+                  <p class="text-[11px] text-slate-600">
+                    Pemberitahuan ketika ada batas waktu pengumpulan bukti atau rekap insentif terbaru.
+                  </p>
+                </div>
+              </label>
+              <label class="flex items-start gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2">
+                <input type="checkbox" class="mt-0.5" />
+                <div>
+                  <p class="font-semibold text-slate-900">Notifikasi WA (opsional)</p>
+                  <p class="text-[11px] text-slate-600">
+                    Integrasi dengan nomor WA resmi pemerintah untuk broadcast tertentu (jika diaktifkan).
+                  </p>
+                </div>
+              </label>
+
+              <div class="flex flex-wrap gap-2 pt-1">
+                <button
+                  class="rounded-xl bg-mabisa-500 px-3.5 py-1.5 text-[11px] font-semibold text-white hover:bg-mabisa-600"
+                >
+                  Simpan preferensi
+                </button>
+                <button
+                  class="rounded-xl border border-slate-200 bg-white px-3.5 py-1.5 text-[11px] text-slate-600 hover:bg-slate-50"
+                >
+                  Reset ke default
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Aktivitas keamanan -->
+          <div class="rounded-3xl border border-slate-200 bg-white p-4 shadow-soft/40">
+            <div class="mb-3 flex items-center justify-between gap-2">
+              <div>
+                <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+                  Aktivitas keamanan
+                </p>
+                <p class="text-sm font-semibold text-slate-900">
+                  Login &amp; penggunaan terakhir
+                </p>
+              </div>
+              <button
+                class="rounded-xl border border-slate-200 bg-slate-50 px-3 py-1 text-[11px] text-slate-700 hover:border-mabisa-200 hover:bg-mabisa-50/60"
+              >
+                Lihat log lengkap
+              </button>
+            </div>
+
+            <div class="space-y-2 text-[11px]">
+              <div class="flex items-start justify-between gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2">
+                <div>
+                  <p class="font-semibold text-slate-900">Login berhasil</p>
+                  <p class="text-slate-600">18 November 2025 • 09.41 WITA</p>
+                  <p class="text-slate-500">Perangkat: Chrome • Windows 10 • IP 192.168.xx.xx</p>
+                </div>
+                <span class="rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-medium text-emerald-700">
+                  Saat ini
+                </span>
+              </div>
+              <div class="flex items-start justify-between gap-2 rounded-2xl border border-slate-200 bg-white px-3 py-2">
+                <div>
+                  <p class="font-semibold text-slate-900">Login berhasil</p>
+                  <p class="text-slate-600">17 November 2025 • 21.13 WITA</p>
+                  <p class="text-slate-500">Perangkat: Chrome • Android • IP 192.168.xx.xx</p>
+                </div>
+              </div>
+              <div class="flex items-start justify-between gap-2 rounded-2xl border border-amber-100 bg-amber-50 px-3 py-2">
+                <div>
+                  <p class="font-semibold text-amber-900">Percobaan login gagal</p>
+                  <p class="text-amber-800">16 November 2025 • 22.02 WITA</p>
+                  <p class="text-amber-800/80">Password salah 3x dari perangkat yang sama.</p>
+                </div>
+                <span class="rounded-full bg-white px-2 py-0.5 text-[10px] font-medium text-amber-700">
+                  Perlu cek
+                </span>
+              </div>
+            </div>
+
+            <div class="mt-3 flex flex-wrap gap-2 text-[11px]">
+              <button
+                class="rounded-xl border border-slate-200 bg-white px-3.5 py-1.5 text-slate-700 hover:border-mabisa-200 hover:bg-mabisa-50/60"
+              >
+                Logout dari semua perangkat
+              </button>
+              <button
+                class="rounded-xl border border-rose-100 bg-rose-50 px-3.5 py-1.5 text-rose-700 hover:border-rose-200"
+              >
+                Laporkan aktivitas mencurigakan
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Placeholder indikator -->
+        <section id="indikator" class="mt-4 rounded-3xl border border-slate-200 bg-white p-4 shadow-soft/40 text-xs">
+          <p class="mb-1 text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+            Indikator manajemen (placeholder)
+          </p>
+          <p class="text-slate-600">
+            Halaman penuh untuk mengatur indikator kinerja RT/RW (bobot, skala, dan cara perhitungan skor) akan ditempatkan di sini. Untuk
+            sementara, Anda bisa fokus menyelesaikan halaman profil dan dashboard.
+          </p>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script>
+    // Sidebar toggle (mobile)
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOpen = document.getElementById('sidebar-open');
+    const sidebarClose = document.getElementById('sidebar-close');
+
+    if (window.innerWidth < 768) {
+      sidebar.classList.add('-translate-x-full');
+    }
+
+    if (sidebarOpen) {
+      sidebarOpen.addEventListener('click', () => {
+        sidebar.classList.remove('-translate-x-full');
+      });
+    }
+
+    if (sidebarClose) {
+      sidebarClose.addEventListener('click', () => {
+        sidebar.classList.add('-translate-x-full');
+      });
+    }
+
+    // Preview avatar huruf awal (kalau nanti mau dynamic)
+    // Contoh sederhana: ambil inisial dari input nama
+    const nameInput = document.querySelector('input[type="text"]');
+    const avatarPreview = document.getElementById('avatarPreview');
+    const avatarLarge = document.getElementById('avatarLarge');
+
+    function updateInitialAvatar(name) {
+      if (!name) return;
+      const parts = name.trim().split(' ');
+      const initials = (parts[0]?.[0] || '') + (parts[1]?.[0] || '');
+      if (avatarPreview) avatarPreview.textContent = initials.toUpperCase();
+      if (avatarLarge) avatarLarge.textContent = initials.toUpperCase();
+    }
+
+    if (nameInput) {
+      updateInitialAvatar(nameInput.value);
+      nameInput.addEventListener('input', (e) => {
+        updateInitialAvatar(e.target.value);
+      });
+    }
+
+    // Placeholder untuk upload avatar (belum benar2 upload)
+    const avatarInput = document.getElementById('avatarInput');
+    if (avatarInput) {
+      avatarInput.addEventListener('change', () => {
+        alert('Di versi Laravel nanti, file ini akan diupload dan disimpan sebagai foto profil.');
+      });
+    }
+  </script>
+</body>
+</html>

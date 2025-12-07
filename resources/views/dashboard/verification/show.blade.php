@@ -1,0 +1,639 @@
+@extends('layouts.dashboard')
+
+@section('content')
+    
+    <!-- MAIN -->
+    <div class="flex flex-1 flex-col">
+
+      <main class="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-8 px-4 py-6">
+        <!-- Info RT & Ringkasan -->
+        <section class="grid gap-4 md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
+          <div class="rounded-3xl border border-slate-200 bg-white p-4 shadow-soft/40">
+            <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">Profil RT/RW</p>
+            <h2 class="text-sm font-semibold text-slate-900">RT 01 / RW 05 — Lingkungan A</h2>
+            <p class="text-xs text-slate-600">
+              Ketua: <span class="font-medium text-slate-900">Budi Santoso</span>
+            </p>
+            <p class="text-[11px] text-slate-500">
+              Kontak: 08xx-xxxx-xxxx • Email: rt01-rw05@makassar.go.id
+            </p>
+          </div>
+          <div class="rounded-3xl border border-slate-200 bg-white p-4 shadow-soft/40">
+            <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+              Ringkasan evidence (November 2025)
+            </p>
+            <div class="mt-3 grid gap-2 text-xs sm:grid-cols-3">
+              <div class="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2">
+                <p class="text-[11px] text-slate-500">Pending</p>
+                <p class="text-lg font-semibold text-amber-600">3</p>
+              </div>
+              <div class="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2">
+                <p class="text-[11px] text-slate-500">Disetujui</p>
+                <p class="text-lg font-semibold text-emerald-600">1</p>
+              </div>
+              <div class="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2">
+                <p class="text-[11px] text-slate-500">Ditolak/Perbaikan</p>
+                <p class="text-lg font-semibold text-rose-600">1</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Tabel evidence (1–3 gambar, 4–5 PDF) -->
+        <section class="rounded-3xl border border-slate-200 bg-white p-4 shadow-soft">
+          <div class="mb-3 flex items-center justify-between gap-2">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                Daftar evidence
+              </p>
+              <p class="text-sm font-semibold text-slate-900">
+                Evidence yang diupload RT 01 / RW 05
+              </p>
+            </div>
+            <p class="text-[11px] text-slate-500">
+              Gunakan tombol <strong>Lihat</strong> dan <strong>Review</strong>.
+            </p>
+          </div>
+
+          <div class="overflow-hidden rounded-2xl border border-slate-200">
+            <table class="min-w-full border-collapse text-xs">
+              <thead class="bg-slate-50 text-[11px] uppercase tracking-wide text-slate-500">
+                <tr>
+                  <th class="px-3 py-2 text-left">Judul &amp; deskripsi</th>
+                  <th class="px-3 py-2 text-left">Waktu &amp; lokasi</th>
+                  <th class="px-3 py-2 text-left">Kategori / indikator</th>
+                  <th class="px-3 py-2 text-left">Status</th>
+                  <th class="px-3 py-2 text-center">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="evidenceTableBody" class="divide-y divide-slate-100">
+                <!-- 1: Gambar -->
+                <tr
+                  data-status="pending"
+                  data-type="image"
+                  data-file="evidence-rt01-001.jpg"
+                  data-title="Kerja bakti kebersihan lingkungan"
+                  data-indicator="Kebersihan lingkungan & pengelolaan drainase"
+                >
+                  <td class="px-3 py-2 align-top">
+                    <p class="font-semibold text-slate-900">Kerja bakti kebersihan lingkungan</p>
+                    <p class="text-[11px] text-slate-500">Pembersihan drainase &amp; selokan sepanjang jalan utama.</p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <p class="text-[11px] text-slate-700">15 Nov 2025 • 08.30</p>
+                    <p class="text-[11px] text-slate-500">Geo-tag: Panakkukang (valid)</p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <p class="text-[11px] text-slate-700">Kebersihan</p>
+                    <p class="text-[11px] text-slate-500">Indikator: Kebersihan lingkungan &amp; drainase</p>
+                  </td>
+                  <td class="px-3 py-2 align-top status-cell">
+                    <span class="rounded-full bg-amber-50 px-2 py-0.5 text-[11px] font-medium text-amber-700">
+                      Pending • 3+ hari
+                    </span>
+                  </td>
+                  <td class="px-3 py-2 align-top text-center">
+                    <div class="flex flex-col items-center gap-1">
+                      <button
+                        class="btn-view-evidence w-full rounded-lg border border-slate-200 bg-white px-3 py-1 text-[11px] text-slate-700 hover:border-mabisa-200 hover:bg-mabisa-50/60"
+                      >
+                        Lihat
+                      </button>
+                      <button
+                        class="btn-review-evidence w-full rounded-lg bg-mabisa-500 px-3 py-1 text-[11px] font-semibold text-white hover:bg-mabisa-600"
+                      >
+                        Review
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- 2: Gambar -->
+                <tr
+                  data-status="pending"
+                  data-type="image"
+                  data-file="evidence-rt01-002.jpg"
+                  data-title="Penataan taman RT"
+                  data-indicator="Penataan ruang hijau & taman lingkungan"
+                >
+                  <td class="px-3 py-2 align-top">
+                    <p class="font-semibold text-slate-900">Penataan taman RT</p>
+                    <p class="text-[11px] text-slate-500">Penanaman bunga dan penataan taman kecil di depan pos ronda.</p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <p class="text-[11px] text-slate-700">16 Nov 2025 • 16.00</p>
+                    <p class="text-[11px] text-slate-500">Geo-tag: Panakkukang (valid)</p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <p class="text-[11px] text-slate-700">Kebersihan</p>
+                    <p class="text-[11px] text-slate-500">Indikator: Ruang hijau &amp; estetika lingkungan</p>
+                  </td>
+                  <td class="px-3 py-2 align-top status-cell">
+                    <span class="rounded-full bg-amber-50 px-2 py-0.5 text-[11px] font-medium text-amber-700">
+                      Pending
+                    </span>
+                  </td>
+                  <td class="px-3 py-2 align-top text-center">
+                    <div class="flex flex-col items-center gap-1">
+                      <button class="btn-view-evidence w-full rounded-lg border border-slate-200 bg-white px-3 py-1 text-[11px] text-slate-700 hover:border-mabisa-200 hover:bg-mabisa-50/60">
+                        Lihat
+                      </button>
+                      <button class="btn-review-evidence w-full rounded-lg bg-mabisa-500 px-3 py-1 text-[11px] font-semibold text-white hover:bg-mabisa-600">
+                        Review
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- 3: Gambar, sudah disetujui -->
+                <tr
+                  data-status="approved"
+                  data-type="image"
+                  data-file="evidence-rt01-003.jpg"
+                  data-title="Pemasangan lampu jalan lingkungan"
+                  data-indicator="Penerangan jalan & keamanan lingkungan"
+                >
+                  <td class="px-3 py-2 align-top">
+                    <p class="font-semibold text-slate-900">Pemasangan lampu jalan lingkungan</p>
+                    <p class="text-[11px] text-slate-500">Pemasangan 3 titik lampu jalan di gang yang sebelumnya gelap.</p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <p class="text-[11px] text-slate-700">12 Nov 2025 • 19.30</p>
+                    <p class="text-[11px] text-slate-500">Geo-tag: Panakkukang (valid)</p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <p class="text-[11px] text-slate-700">Keamanan</p>
+                    <p class="text-[11px] text-slate-500">Indikator: Penerangan &amp; pencegahan kriminalitas</p>
+                  </td>
+                  <td class="px-3 py-2 align-top status-cell">
+                    <span class="rounded-full bg-emerald-50 px-2 py-0.5 text-[11px] font-medium text-emerald-700">
+                      Disetujui
+                    </span>
+                  </td>
+                  <td class="px-3 py-2 align-top text-center">
+                    <div class="flex flex-col items-center gap-1">
+                      <button class="btn-view-evidence w-full rounded-lg border border-slate-200 bg-white px-3 py-1 text-[11px] text-slate-700 hover:border-mabisa-200 hover:bg-mabisa-50/60">
+                        Lihat
+                      </button>
+                      <button class="btn-review-evidence w-full rounded-lg bg-mabisa-500 px-3 py-1 text-[11px] font-semibold text-white hover:bg-mabisa-600">
+                        Review
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- 4: PDF -->
+                <tr
+                  data-status="pending"
+                  data-type="pdf"
+                  data-file="rekap-kegiatan-sosial-rt01-minggu2-nov2025.pdf"
+                  data-title="Rekap kegiatan sosial mingguan"
+                  data-indicator="Pelaksanaan kegiatan sosial & gotong royong"
+                >
+                  <td class="px-3 py-2 align-top">
+                    <p class="font-semibold text-slate-900">Rekap kegiatan sosial mingguan</p>
+                    <p class="text-[11px] text-slate-500">Dokumen PDF berisi rangkuman kegiatan sosial warga minggu ke-2.</p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <p class="text-[11px] text-slate-700">17 Nov 2025 • 14.10</p>
+                    <p class="text-[11px] text-slate-500">Upload dari: Android (RT)</p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <p class="text-[11px] text-slate-700">Sosial</p>
+                    <p class="text-[11px] text-slate-500">Indikator: Kegiatan sosial &amp; partisipasi warga</p>
+                  </td>
+                  <td class="px-3 py-2 align-top status-cell">
+                    <span class="rounded-full bg-amber-50 px-2 py-0.5 text-[11px] font-medium text-amber-700">
+                      Pending
+                    </span>
+                  </td>
+                  <td class="px-3 py-2 align-top text-center">
+                    <div class="flex flex-col items-center gap-1">
+                      <button class="btn-view-evidence w-full rounded-lg border border-slate-200 bg-white px-3 py-1 text-[11px] text-slate-700 hover:border-mabisa-200 hover:bg-mabisa-50/60">
+                        Lihat
+                      </button>
+                      <button class="btn-review-evidence w-full rounded-lg bg-mabisa-500 px-3 py-1 text-[11px] font-semibold text-white hover:bg-mabisa-600">
+                        Review
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- 5: PDF, perbaikan -->
+                <tr
+                  data-status="rejected"
+                  data-type="pdf"
+                  data-file="laporan-administrasi-bulanan-rt01-nov2025.pdf"
+                  data-title="Laporan administrasi bulanan"
+                  data-indicator="Kelengkapan administrasi & pelaporan"
+                >
+                  <td class="px-3 py-2 align-top">
+                    <p class="font-semibold text-slate-900">Laporan administrasi bulanan</p>
+                    <p class="text-[11px] text-slate-500">Dokumen PDF berisi laporan administrasi RT bulan November.</p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <p class="text-[11px] text-slate-700">10 Nov 2025 • 09.00</p>
+                    <p class="text-[11px] text-slate-500">Upload dari: Desktop (RT)</p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <p class="text-[11px] text-slate-700">Administrasi</p>
+                    <p class="text-[11px] text-slate-500">Indikator: Kelengkapan formulir &amp; tanda tangan</p>
+                  </td>
+                  <td class="px-3 py-2 align-top status-cell">
+                    <span class="rounded-full bg-rose-50 px-2 py-0.5 text-[11px] font-medium text-rose-700">
+                      Perlu perbaikan
+                    </span>
+                  </td>
+                  <td class="px-3 py-2 align-top text-center">
+                    <div class="flex flex-col items-center gap-1">
+                      <button class="btn-view-evidence w-full rounded-lg border border-slate-200 bg-white px-3 py-1 text-[11px] text-slate-700 hover:border-mabisa-200 hover:bg-mabisa-50/60">
+                        Lihat
+                      </button>
+                      <button class="btn-review-evidence w-full rounded-lg bg-mabisa-500 px-3 py-1 text-[11px] font-semibold text-white hover:bg-mabisa-600">
+                        Review
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+
+
+      <!-- MODAL LIHAT -->
+  <div
+    id="viewModal"
+    class="fixed inset-0 z-40 hidden items-center justify-center bg-slate-900/40 px-4"
+  >
+    <div class="w-full max-w-2xl rounded-3xl border border-slate-200 bg-white p-4 shadow-soft">
+      <div class="mb-3 flex items-start justify-between gap-2">
+        <div>
+          <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">Pratinjau evidence</p>
+          <h2 id="viewTitle" class="text-sm font-semibold text-slate-900">Judul evidence</h2>
+          <p id="viewFile" class="text-[11px] text-slate-500">File: -</p>
+        </div>
+        <button
+          id="viewModalClose"
+          class="rounded-lg border border-slate-200 bg-slate-50 px-2 py-1 text-[11px] text-slate-600 hover:bg-slate-100"
+        >
+          ✕
+        </button>
+      </div>
+      <div id="viewPreview" class="text-xs text-slate-600">
+        <!-- isi via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL REVIEW (TOMBOL SETUJUI/TOLAK/PERBAIKI) -->
+  <div
+    id="reviewModal"
+    class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/40 px-4"
+  >
+    <div class="w-full max-w-md rounded-3xl border border-slate-200 bg-white p-4 shadow-soft">
+      <div class="mb-2 flex items-start justify-between gap-2">
+        <div>
+          <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">Review evidence</p>
+          <h2 id="reviewTitle" class="text-sm font-semibold text-slate-900">Judul evidence</h2>
+          <p id="reviewIndicator" class="text-[11px] text-slate-500">Indikator: -</p>
+        </div>
+        <button
+          id="reviewModalClose"
+          class="rounded-lg border border-slate-200 bg-slate-50 px-2 py-1 text-[11px] text-slate-600 hover:bg-slate-100"
+        >
+          ✕
+        </button>
+      </div>
+
+      <div class="mb-3 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-[11px] text-slate-600">
+        <p id="reviewSummary">
+          Evidence ini akan mempengaruhi penilaian insentif RT/RW. Pilih salah satu tindakan di bawah.
+        </p>
+      </div>
+
+      <div class="text-[11px] text-slate-500 mb-2" id="reviewStatusInfo">
+        Status saat ini: <span id="reviewStatusText" class="font-semibold text-amber-700">Pending</span>
+      </div>
+
+      <div class="flex flex-col gap-2 text-[11px]">
+        <button
+          id="btnSetujui"
+          class="w-full rounded-xl bg-emerald-500 px-3 py-1.5 font-semibold text-white hover:bg-emerald-600"
+        >
+          ✅ Setujui
+        </button>
+        <button
+          id="btnTolak"
+          class="w-full rounded-xl border border-rose-100 bg-rose-50 px-3 py-1.5 font-semibold text-rose-700 hover:border-rose-200"
+        >
+          ❌ Tolak
+        </button>
+        <button
+          id="btnPerbaiki"
+          class="w-full rounded-xl border border-amber-100 bg-amber-50 px-3 py-1.5 font-semibold text-amber-700 hover:border-amber-200"
+        >
+          ✏ Minta perbaikan
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL KONFIRMASI (ISI TEKS & TOMBOL KONFIRM) -->
+  <div
+    id="confirmModal"
+    class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/40 px-4"
+  >
+    <div class="w-full max-w-md rounded-3xl border border-slate-200 bg-white p-4 shadow-soft">
+      <div class="mb-2 flex items-start justify-between gap-2">
+        <div>
+          <p id="confirmTag" class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">Konfirmasi</p>
+          <h2 id="confirmTitle" class="text-sm font-semibold text-slate-900">Judul konfirmasi</h2>
+        </div>
+        <button
+          id="confirmModalClose"
+          class="rounded-lg border border-slate-200 bg-slate-50 px-2 py-1 text-[11px] text-slate-600 hover:bg-slate-100"
+        >
+          ✕
+        </button>
+      </div>
+
+      <div class="space-y-3 text-[11px] text-slate-600">
+        <p id="confirmMessage">
+          Teks konfirmasi akan muncul di sini.
+        </p>
+
+        <div id="confirmTextareaWrap" class="hidden space-y-1">
+          <label for="confirmTextarea" class="text-[11px] font-semibold text-slate-700">
+            Pesan untuk RT/RW
+          </label>
+          <textarea
+            id="confirmTextarea"
+            rows="3"
+            class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-800 focus:border-mabisa-300 focus:outline-none focus:ring-1 focus:ring-mabisa-200"
+            placeholder="Silakan masukkan pesan perbaikan yang akan diterima RT/RW..."
+          ></textarea>
+        </div>
+
+        <p id="confirmNote" class="text-[10px] text-slate-500">
+          Keputusan Anda akan tercatat di log verifikasi.
+        </p>
+      </div>
+
+      <div class="mt-3 flex justify-end gap-2 text-[11px]">
+        <button
+          id="confirmCancel"
+          class="rounded-xl border border-slate-200 bg-white px-3 py-1.5 text-[11px] text-slate-600 hover:bg-slate-50"
+        >
+          Batal
+        </button>
+        <button
+          id="confirmOk"
+          class="rounded-xl bg-mabisa-500 px-3.5 py-1.5 text-[11px] font-semibold text-white hover:bg-mabisa-600"
+        >
+          Konfirmasi
+        </button>
+      </div>
+    </div>
+  </div>
+@endsection
+
+@push('script')
+    <script>
+        // ===== MODAL LIHAT =====
+    var viewModal = document.getElementById('viewModal');
+    var viewModalClose = document.getElementById('viewModalClose');
+    var viewTitle = document.getElementById('viewTitle');
+    var viewFile = document.getElementById('viewFile');
+    var viewPreview = document.getElementById('viewPreview');
+
+    function openViewModal(row) {
+      var title = row.getAttribute('data-title');
+      var file = row.getAttribute('data-file');
+      var type = row.getAttribute('data-type');
+
+      viewTitle.textContent = title || 'Evidence';
+      viewFile.textContent = 'File: ' + (file || '-');
+      viewPreview.innerHTML = '';
+
+      if (type === 'image') {
+        viewPreview.innerHTML = `
+          <div class="aspect-video w-full rounded-2xl border border-slate-200 bg-slate-100 flex items-center justify-center text-[11px] text-slate-400 mb-2">
+            Pratinjau gambar evidence (dummy)
+          </div>
+          <p class="text-[11px] text-slate-500">
+            Di Laravel: tarik file dari storage, misalnya <code>storage/app/public/mabisa/${file}</code>.
+          </p>
+        `;
+      } else {
+        viewPreview.innerHTML = `
+          <div class="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 mb-2">
+            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-mabisa-100 text-[11px] font-semibold text-mabisa-700">
+              PDF
+            </div>
+            <div class="text-[11px]">
+              <p class="font-semibold text-slate-800">Dokumen PDF evidence</p>
+              <p class="text-slate-500 break-all">${file}</p>
+            </div>
+          </div>
+          <div class="aspect-video w-full rounded-2xl border border-slate-200 bg-slate-100 flex items-center justify-center text-[11px] text-slate-400">
+            Pratinjau PDF (dummy)
+          </div>
+        `;
+      }
+
+      viewModal.style.display = 'flex';
+    }
+
+    function closeViewModal() {
+      viewModal.style.display = 'none';
+    }
+
+    viewModalClose.addEventListener('click', closeViewModal);
+    viewModal.addEventListener('click', function (e) {
+      if (e.target === viewModal) closeViewModal();
+    });
+
+    var viewButtons = document.getElementsByClassName('btn-view-evidence');
+    for (var i = 0; i < viewButtons.length; i++) {
+      viewButtons[i].addEventListener('click', function () {
+        var row = this.closest('tr');
+        if (!row) return;
+        openViewModal(row);
+      });
+    }
+
+    // ===== MODAL REVIEW (PILIH SETUJUI/TOLAK/PERBAIKI) =====
+    var reviewModal = document.getElementById('reviewModal');
+    var reviewModalClose = document.getElementById('reviewModalClose');
+    var reviewTitle = document.getElementById('reviewTitle');
+    var reviewIndicator = document.getElementById('reviewIndicator');
+    var reviewStatusText = document.getElementById('reviewStatusText');
+
+    var btnSetujui = document.getElementById('btnSetujui');
+    var btnTolak = document.getElementById('btnTolak');
+    var btnPerbaiki = document.getElementById('btnPerbaiki');
+
+    var currentRow = null;
+    var pendingAction = null; // 'approve' | 'reject' | 'revise'
+
+    function statusLabel(status) {
+      if (status === 'pending') return 'Pending';
+      if (status === 'approved') return 'Disetujui';
+      if (status === 'rejected') return 'Ditolak / Perlu perbaikan';
+      return status;
+    }
+
+    function openReviewModal(row) {
+      currentRow = row;
+      var title = row.getAttribute('data-title');
+      var indicator = row.getAttribute('data-indicator') || '-';
+      var status = row.getAttribute('data-status') || 'pending';
+
+      reviewTitle.textContent = title || 'Evidence';
+      reviewIndicator.textContent = 'Indikator: ' + indicator;
+      reviewStatusText.textContent = statusLabel(status);
+      if (status === 'approved') reviewStatusText.className = 'font-semibold text-[11px] text-emerald-700';
+      else if (status === 'rejected') reviewStatusText.className = 'font-semibold text-[11px] text-rose-700';
+      else reviewStatusText.className = 'font-semibold text-[11px] text-amber-700';
+
+      reviewModal.style.display = 'flex';
+    }
+
+    function closeReviewModal() {
+      reviewModal.style.display = 'none';
+      currentRow = null;
+    }
+
+    reviewModalClose.addEventListener('click', closeReviewModal);
+    reviewModal.addEventListener('click', function (e) {
+      if (e.target === reviewModal) closeReviewModal();
+    });
+
+    var reviewButtons = document.getElementsByClassName('btn-review-evidence');
+    for (var j = 0; j < reviewButtons.length; j++) {
+      reviewButtons[j].addEventListener('click', function () {
+        var row = this.closest('tr');
+        if (!row) return;
+        openReviewModal(row);
+      });
+    }
+
+    // ===== MODAL KONFIRMASI SETUJUI/TOLAK/PERBAIKI =====
+    var confirmModal = document.getElementById('confirmModal');
+    var confirmTag = document.getElementById('confirmTag');
+    var confirmTitle = document.getElementById('confirmTitle');
+    var confirmMessage = document.getElementById('confirmMessage');
+    var confirmNote = document.getElementById('confirmNote');
+    var confirmTextareaWrap = document.getElementById('confirmTextareaWrap');
+    var confirmTextarea = document.getElementById('confirmTextarea');
+
+    var confirmModalClose = document.getElementById('confirmModalClose');
+    var confirmCancel = document.getElementById('confirmCancel');
+    var confirmOk = document.getElementById('confirmOk');
+
+    function openConfirmModal(action) {
+      if (!currentRow) return;
+      pendingAction = action;
+      var title = currentRow.getAttribute('data-title') || 'Evidence';
+      var indikator = currentRow.getAttribute('data-indicator') || '-';
+
+      confirmTextarea.value = '';
+
+      if (action === 'approve') {
+        confirmTag.textContent = 'Konfirmasi persetujuan';
+        confirmTitle.textContent = 'Setujui evidence ini?';
+        confirmMessage.innerHTML =
+          'Anda <strong>' + currentUserName +
+          '</strong> dengan ini secara sadar menyatakan bahwa evidence <strong>"' + title +
+          '"</strong> yang dikumpulkan oleh RT 01 / RW 05 <strong>sesuai</strong> dengan indikator <strong>' +
+          indikator + '</strong>.';
+        confirmTextareaWrap.classList.add('hidden');
+        confirmNote.textContent =
+          'Keputusan ini akan digunakan dalam perhitungan insentif dan tercatat di log verifikasi.';
+        confirmOk.textContent = 'Ya, setujui';
+        confirmOk.className = 'rounded-xl bg-emerald-500 px-3.5 py-1.5 text-[11px] font-semibold text-white hover:bg-emerald-600';
+      } else if (action === 'reject') {
+        confirmTag.textContent = 'Konfirmasi penolakan';
+        confirmTitle.textContent = 'Tolak evidence ini?';
+        confirmMessage.textContent =
+          'Tindakan ini tidak dapat diubah atau direvisi secara langsung. Evidence "' +
+          title + '" akan ditandai sebagai DITOLAK dan tidak akan dihitung sebagai bukti sah.';
+        confirmTextareaWrap.classList.add('hidden');
+        confirmNote.textContent =
+          'Jika RT/RW ingin mengajukan ulang, mereka harus mengunggah evidence baru.';
+        confirmOk.textContent = 'Ya, tolak';
+        confirmOk.className = 'rounded-xl bg-rose-600 px-3.5 py-1.5 text-[11px] font-semibold text-white hover:bg-rose-700';
+      } else if (action === 'revise') {
+        confirmTag.textContent = 'Permintaan perbaikan';
+        confirmTitle.textContent = 'Minta perbaikan evidence';
+        confirmMessage.textContent =
+          'Silakan masukkan pesan yang dapat dilihat oleh RT/RW untuk melakukan revisi evidence ini.';
+        confirmTextareaWrap.classList.remove('hidden');
+        confirmNote.textContent =
+          'Gunakan bahasa yang jelas dan spesifik agar RT/RW paham apa yang perlu diperbaiki.';
+        confirmOk.textContent = 'Kirim permintaan perbaikan';
+        confirmOk.className = 'rounded-xl bg-amber-500 px-3.5 py-1.5 text-[11px] font-semibold text-white hover:bg-amber-600';
+      }
+
+      confirmModal.style.display = 'flex';
+    }
+
+    function closeConfirmModal() {
+      confirmModal.style.display = 'none';
+      pendingAction = null;
+    }
+
+    confirmModalClose.addEventListener('click', closeConfirmModal);
+    confirmCancel.addEventListener('click', closeConfirmModal);
+    confirmModal.addEventListener('click', function (e) {
+      if (e.target === confirmModal) closeConfirmModal();
+    });
+
+    btnSetujui.addEventListener('click', function () {
+      openConfirmModal('approve');
+    });
+    btnTolak.addEventListener('click', function () {
+      openConfirmModal('reject');
+    });
+    btnPerbaiki.addEventListener('click', function () {
+      openConfirmModal('revise');
+    });
+
+    // Konfirmasi final: update status di tabel (dummy)
+    confirmOk.addEventListener('click', function () {
+      if (!currentRow || !pendingAction) return;
+
+      var statusCell = currentRow.querySelector('.status-cell');
+      var title = currentRow.getAttribute('data-title') || 'Evidence';
+
+      if (pendingAction === 'approve') {
+        currentRow.setAttribute('data-status', 'approved');
+        statusCell.innerHTML =
+          '<span class="rounded-full bg-emerald-50 px-2 py-0.5 text-[11px] font-medium text-emerald-700">Disetujui</span>';
+        alert('Di Laravel: status "' + title + '" akan disimpan sebagai DISETUJUI.');
+      } else if (pendingAction === 'reject') {
+        currentRow.setAttribute('data-status', 'rejected');
+        statusCell.innerHTML =
+          '<span class="rounded-full bg-rose-50 px-2 py-0.5 text-[11px] font-medium text-rose-700">Ditolak</span>';
+        alert('Di Laravel: status "' + title + '" akan disimpan sebagai DITOLAK.');
+      } else if (pendingAction === 'revise') {
+        var pesan = confirmTextarea.value.trim();
+        currentRow.setAttribute('data-status', 'rejected');
+        statusCell.innerHTML =
+          '<span class="rounded-full bg-rose-50 px-2 py-0.5 text-[11px] font-medium text-rose-700">Perlu perbaikan</span>';
+        if (pesan) {
+          alert('Di Laravel: pesan perbaikan berikut akan dikirim ke RT/RW:\n\n' + pesan);
+        } else {
+          alert('Di Laravel: permintaan perbaikan tanpa pesan tambahan akan tetap tercatat.');
+        }
+      }
+
+      closeConfirmModal();
+      closeReviewModal();
+    });
+    </script>
+@endpush

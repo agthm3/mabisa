@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Detail Riwayat Bukti — MABISA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            mabisa: {
+              50: '#fdf5f5',
+              100: '#fae5e6',
+              200: '#f3c7ca',
+              300: '#e89aa0',
+              400: '#d86872',
+              500: '#b1333f',  // maroon utama
+              600: '#8f2633',
+              700: '#6e1d28',
+              800: '#4a151d',
+              900: '#2e0e14',
+            },
+          },
+          boxShadow: {
+            soft: '0 18px 45px rgba(15,23,42,0.08)',
+          },
+          borderRadius: {
+            '3xl': '1.75rem',
+          },
+        },
+      },
+    };
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-900">
+  <!-- Background lembut -->
+  <div class="pointer-events-none fixed inset-0 -z-10">
+    <div class="absolute -top-32 -right-16 h-72 w-72 rounded-full bg-mabisa-100 opacity-70 blur-3xl"></div>
+    <div class="absolute -bottom-32 -left-20 h-80 w-80 rounded-full bg-mabisa-50 opacity-80 blur-3xl"></div>
+  </div>
+
+  <div class="flex min-h-screen">
+    <!-- SIDEBAR (RT/RW) -->
+    <aside
+      id="sidebar"
+      class="fixed inset-y-0 left-0 z-30 flex w-64 flex-col border-r border-slate-200 bg-white px-4 py-4 shadow-soft transition-transform duration-200 md:static md:translate-x-0"
+    >
+      <!-- Logo + close (mobile) -->
+      <div class="mb-6 flex items-center justify-between gap-2">
+        <div class="flex items-center gap-3">
+          <div class="flex h-9 w-9 items-center justify-center rounded-2xl bg-mabisa-500 text-white shadow-soft">
+            <span class="text-xs font-semibold tracking-tight">MB</span>
+          </div>
+          <div class="leading-tight">
+            <p class="text-sm font-semibold tracking-tight text-slate-900">MABISA</p>
+            <p class="text-[11px] text-slate-500">Makassar Bukti &amp; Insentif</p>
+          </div>
+        </div>
+        <button
+          id="sidebar-close"
+          class="rounded-lg border border-slate-200 bg-slate-50 p-1 text-slate-600 md:hidden"
+        >
+          ✕
+        </button>
+      </div>
+
+      <!-- Info user RT/RW -->
+      <div class="mb-4 rounded-2xl border border-slate-200 bg-slate-50 p-3 text-xs">
+        <div class="flex items-center gap-3">
+          <div class="flex h-9 w-9 items-center justify-center rounded-full bg-mabisa-50 text-mabisa-700 text-xs font-semibold">
+            RT
+          </div>
+          <div class="flex-1">
+            <p class="text-[13px] font-semibold text-slate-900">Pak Ahmad</p>
+            <p class="text-[11px] text-slate-500">Ketua RT 01 / RW 05</p>
+          </div>
+        </div>
+        <p class="mt-2 text-[11px] text-slate-500">
+          Kel. Panakkukang • Kec. Panakkukang • Kota Makassar
+        </p>
+      </div>
+
+      <!-- Menu -->
+      <nav class="flex-1 space-y-5 text-sm">
+        <div>
+          <p class="mb-1 px-2 text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+            Navigasi
+          </p>
+          <ul class="space-y-1">
+            <li>
+              <a
+                href="#"
+                class="flex items-center gap-2 rounded-xl px-3 py-2 text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+              >
+                <span>🏠</span><span>Beranda RT/RW</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="mabisa-bukti-rt.html"
+                class="flex items-center gap-2 rounded-xl px-3 py-2 text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+              >
+                <span>📷</span><span>Bukti RT/RW</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="mabisa-bukti-history-rt.html"
+                class="flex items-center gap-2 rounded-xl px-3 py-2 text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+              >
+                <span>🧾</span><span>Riwayat bukti</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="flex items-center gap-2 rounded-xl px-3 py-2 text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+              >
+                <span>👤</span><span>Profil saya</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="mt-4 border-t border-slate-200 pt-3 text-[11px] text-slate-500">
+        <p>Bagian dari ekosistem <span class="font-semibold text-slate-800">SIGAP BRIDA</span>.</p>
+        <button
+          class="mt-2 inline-flex items-center gap-1 rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-1 text-[11px] text-slate-700"
+          onclick="history.back()"
+        >
+          ↩ Kembali
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="flex flex-1 flex-col">
+      <!-- Top bar -->
+      <header class="sticky top-0 z-20 border-b border-slate-200 bg-white/80 backdrop-blur-md">
+        <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+          <div>
+            <p class="text-xs font-medium uppercase tracking-wider text-slate-500">
+              Detail riwayat bukti
+            </p>
+            <h1 class="text-lg font-semibold text-slate-900">
+              Bukti RT 01 / RW 05 — November 2025
+            </h1>
+            <p class="text-[11px] text-slate-500">
+              Menampilkan semua evidence yang dikirim pada periode ini, lengkap dengan status verifikasi.
+            </p>
+          </div>
+          <button
+            id="sidebar-open"
+            class="inline-flex items-center rounded-lg border border-slate-200 bg-white p-1.5 text-slate-700 md:hidden"
+          >
+            ☰
+          </button>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <main class="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-8 px-4 py-6">
+        <!-- Ringkasan -->
+        <section class="grid gap-4 md:grid-cols-[minmax(0,1.4fr)_minmax(0,0.8fr)]">
+          <div class="rounded-3xl border border-slate-200 bg-white p-4 shadow-soft/40 text-xs">
+            <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+              Rekap periode November 2025
+            </p>
+            <div class="mt-3 grid gap-2 sm:grid-cols-3">
+              <div class="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2">
+                <p class="text-[11px] text-slate-500">Total indikator</p>
+                <p class="text-xl font-semibold text-slate-900">4</p>
+              </div>
+              <div class="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2">
+                <p class="text-[11px] text-slate-500">Bukti sah (disetujui)</p>
+                <p class="text-xl font-semibold text-emerald-600">3</p>
+              </div>
+              <div class="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2">
+                <p class="text-[11px] text-slate-500">Perbaikan / catatan</p>
+                <p class="text-xl font-semibold text-amber-600">1</p>
+              </div>
+            </div>
+            <p class="mt-3 text-[11px] text-slate-500">
+              Riwayat ini sudah <strong>terkunci</strong>. Perubahan hanya bisa dilakukan melalui pengajuan resmi ke kelurahan/kecamatan.
+            </p>
+          </div>
+
+          <div class="rounded-3xl border border-slate-200 bg-white p-4 shadow-soft/40 text-xs">
+            <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+              Status insentif
+            </p>
+            <p class="mt-2 text-sm font-semibold text-slate-900">
+              Insentif bulan November 2025
+            </p>
+            <p class="text-[11px] text-slate-600">
+              Berdasarkan bukti yang disetujui oleh Lurah & Camat.
+            </p>
+            <div class="mt-3 flex items-center justify-between gap-3">
+              <div>
+                <p class="text-[11px] text-slate-500">Status</p>
+                <p class="text-[13px] font-semibold text-emerald-700">
+                  Layak insentif
+                </p>
+              </div>
+              <span class="rounded-full bg-emerald-50 px-3 py-1 text-[11px] font-medium text-emerald-700">
+                Disetujui
+              </span>
+            </div>
+            <p class="mt-2 text-[11px] text-slate-500">
+              Keterangan verifikator: <span class="italic">“Bukti sudah lengkap dan sesuai indikator yang berlaku.”</span>
+            </p>
+          </div>
+        </section>
+
+        <!-- Filter evidence -->
+        <section class="rounded-3xl border border-slate-200 bg-white p-4 shadow-soft">
+          <div class="flex flex-wrap items-center justify-between gap-3 text-[11px]">
+            <div class="space-y-1">
+              <p class="font-semibold uppercase tracking-wider text-slate-500">
+                Filter evidence
+              </p>
+              <p class="text-slate-600">
+                Gunakan filter untuk fokus ke kategori atau status tertentu.
+              </p>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+              <select
+                id="filterKategori"
+                class="rounded-xl border border-slate-200 bg-slate-50 px-3 py-1.5 text-[11px] text-slate-700"
+              >
+                <option value="all">Semua kategori</option>
+                <option value="Kebersihan">Kebersihan</option>
+                <option value="Keamanan">Keamanan</option>
+                <option value="Sosial">Sosial</option>
+                <option value="Administrasi">Administrasi</option>
+              </select>
+              <select
+                id="filterStatus"
+                class="rounded-xl border border-slate-200 bg-slate-50 px-3 py-1.5 text-[11px] text-slate-700"
+              >
+                <option value="all">Semua status</option>
+                <option value="approved">Disetujui</option>
+                <option value="revised">Perlu perbaikan</option>
+                <option value="rejected">Ditolak</option>
+              </select>
+              <div class="relative">
+                <span class="pointer-events-none absolute inset-y-0 left-2 flex items-center text-[11px] text-slate-400">🔍</span>
+                <input
+                  id="searchJudul"
+                  type="text"
+                  class="w-40 rounded-xl border border-slate-200 bg-slate-50 pl-6 pr-2 py-1.5 text-[11px] text-slate-700 focus:border-mabisa-300 focus:outline-none focus:ring-1 focus:ring-mabisa-200"
+                  placeholder="Cari judul..."
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- LIST EVIDENCE (langsung tampil gambar/pdf) -->
+        <section class="space-y-4">
+          <!-- Card evidence -->
+          <article
+            class="evidence-card rounded-3xl border border-slate-200 bg-white p-4 shadow-soft"
+            data-kategori="Kebersihan"
+            data-status="approved"
+            data-title="kerja bakti kebersihan lingkungan"
+            data-type="image"
+          >
+            <div class="flex flex-wrap items-start justify-between gap-3">
+              <div>
+                <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+                  Kebersihan • Indikator 1
+                </p>
+                <h2 class="text-sm font-semibold text-slate-900">
+                  Kerja bakti kebersihan lingkungan
+                </h2>
+                <p class="text-[11px] text-slate-500">
+                  Dokumentasi kerja bakti membersihkan jalan utama, selokan, dan area depan rumah warga.
+                </p>
+              </div>
+              <div class="text-right text-[11px]">
+                <p class="text-slate-500">Tanggal kegiatan</p>
+                <p class="font-semibold text-slate-800">10 November 2025</p>
+                <p class="text-slate-500">Upload: 11 November 2025 • 09.15</p>
+              </div>
+            </div>
+
+            <div class="mt-3 grid gap-3 md:grid-cols-[minmax(0,1.4fr)_minmax(0,0.8fr)]">
+              <!-- Preview foto -->
+              <div>
+                <div class="aspect-video w-full rounded-2xl border border-slate-200 bg-slate-100 flex items-center justify-center text-[11px] text-slate-400">
+                  Foto kegiatan (arsip) — placeholder
+                </div>
+                <p class="mt-1 text-[11px] text-slate-500">
+                  Di sistem sebenarnya, foto akan diambil dari storage MABISA (misalnya <code>storage/app/public/mabisa/rt01/nov2025-kebersihan-1.jpg</code>).
+                </p>
+              </div>
+
+              <!-- Info status -->
+              <div class="space-y-2 text-[11px]">
+                <div>
+                  <p class="text-slate-500">Status verifikasi</p>
+                  <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 font-medium text-emerald-700">
+                    ✅ Disetujui
+                  </span>
+                </div>
+                <div>
+                  <p class="text-slate-500">Catatan verifikator</p>
+                  <p class="text-slate-700">
+                    “Bukti sudah jelas, kegiatan sesuai jadwal kerja bakti bulanan lingkungan.”
+                  </p>
+                </div>
+                <div>
+                  <p class="text-slate-500">Jejak verifikasi</p>
+                  <ul class="list-disc pl-4 text-[11px] text-slate-600">
+                    <li>Diterima Lurah: 12 Nov 2025</li>
+                    <li>Disetujui Camat: 14 Nov 2025</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Evidence 2: Foto taman -->
+          <article
+            class="evidence-card rounded-3xl border border-slate-200 bg-white p-4 shadow-soft"
+            data-kategori="Kebersihan"
+            data-status="approved"
+            data-title="penataan taman rt"
+            data-type="image"
+          >
+            <div class="flex flex-wrap items-start justify-between gap-3">
+              <div>
+                <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+                  Kebersihan • Indikator 2
+                </p>
+                <h2 class="text-sm font-semibold text-slate-900">
+                  Penataan taman RT
+                </h2>
+                <p class="text-[11px] text-slate-500">
+                  Penanaman bunga, pengecatan pot, dan pembuatan taman kecil di sekitar pos ronda.
+                </p>
+              </div>
+              <div class="text-right text-[11px]">
+                <p class="text-slate-500">Tanggal kegiatan</p>
+                <p class="font-semibold text-slate-800">05 November 2025</p>
+                <p class="text-slate-500">Upload: 05 November 2025 • 18.20</p>
+              </div>
+            </div>
+
+            <div class="mt-3 grid gap-3 md:grid-cols-[minmax(0,1.4fr)_minmax(0,0.8fr)]">
+              <div>
+                <div class="aspect-video w-full rounded-2xl border border-slate-200 bg-slate-100 flex items-center justify-center text-[11px] text-slate-400">
+                  Foto taman RT (arsip) — placeholder
+                </div>
+                <p class="mt-1 text-[11px] text-slate-500">
+                  Bisa menampilkan beberapa foto sekaligus (slider) di implementasi produksi.
+                </p>
+              </div>
+
+              <div class="space-y-2 text-[11px]">
+                <div>
+                  <p class="text-slate-500">Status verifikasi</p>
+                  <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 font-medium text-emerald-700">
+                    ✅ Disetujui
+                  </span>
+                </div>
+                <div>
+                  <p class="text-slate-500">Catatan verifikator</p>
+                  <p class="text-slate-700">
+                    “Taman sudah rapi dan menambah estetika lingkungan.”
+                  </p>
+                </div>
+                <div>
+                  <p class="text-slate-500">Jejak verifikasi</p>
+                  <ul class="list-disc pl-4 text-[11px] text-slate-600">
+                    <li>Dicek kelurahan: 06 Nov 2025</li>
+                    <li>Foto sesuai lokasi geo-tag</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Evidence 3: Keamanan (foto) -->
+          <article
+            class="evidence-card rounded-3xl border border-slate-200 bg-white p-4 shadow-soft"
+            data-kategori="Keamanan"
+            data-status="approved"
+            data-title="pemasangan lampu jalan"
+            data-type="image"
+          >
+            <div class="flex flex-wrap items-start justify-between gap-3">
+              <div>
+                <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+                  Keamanan • Indikator 1
+                </p>
+                <h2 class="text-sm font-semibold text-slate-900">
+                  Pemasangan lampu jalan lingkungan
+                </h2>
+                <p class="text-[11px] text-slate-500">
+                  Dokumentasi pemasangan dan kondisi lampu jalan di titik-titik rawan gelap.
+                </p>
+              </div>
+              <div class="text-right text-[11px]">
+                <p class="text-slate-500">Tanggal kegiatan</p>
+                <p class="font-semibold text-slate-800">03 November 2025</p>
+                <p class="text-slate-500">Upload: 03 November 2025 • 21.05</p>
+              </div>
+            </div>
+
+            <div class="mt-3 grid gap-3 md:grid-cols-[minmax(0,1.4fr)_minmax(0,0.8fr)]">
+              <div>
+                <div class="aspect-video w-full rounded-2xl border border-slate-200 bg-slate-100 flex items-center justify-center text-[11px] text-slate-400">
+                  Foto lampu jalan (arsip) — placeholder
+                </div>
+                <p class="mt-1 text-[11px] text-slate-500">
+                  Di lapangan, foto diambil malam hari untuk menunjukkan lampu menyala.
+                </p>
+              </div>
+
+              <div class="space-y-2 text-[11px]">
+                <div>
+                  <p class="text-slate-500">Status verifikasi</p>
+                  <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 font-medium text-emerald-700">
+                    ✅ Disetujui
+                  </span>
+                </div>
+                <div>
+                  <p class="text-slate-500">Catatan verifikator</p>
+                  <p class="text-slate-700">
+                    “Lokasi sudah sesuai usulan, lampu terpasang dan menyala.”
+                  </p>
+                </div>
+                <div>
+                  <p class="text-slate-500">Jejak verifikasi</p>
+                  <ul class="list-disc pl-4 text-[11px] text-slate-600">
+                    <li>Dicek oleh petugas kelurahan: 04 Nov 2025</li>
+                    <li>Tidak ada komplain warga</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Evidence 4: Sosial (PDF) -->
+          <article
+            class="evidence-card rounded-3xl border border-slate-200 bg-white p-4 shadow-soft"
+            data-kategori="Sosial"
+            data-status="approved"
+            data-title="rekap kegiatan sosial mingguan"
+            data-type="pdf"
+          >
+            <div class="flex flex-wrap items-start justify-between gap-3">
+              <div>
+                <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+                  Sosial • Indikator 1
+                </p>
+                <h2 class="text-sm font-semibold text-slate-900">
+                  Rekap kegiatan sosial mingguan
+                </h2>
+                <p class="text-[11px] text-slate-500">
+                  Dokumen PDF berisi rangkuman kegiatan sosial warga (kunjungan sakit, arisan, pengajian, dll).
+                </p>
+              </div>
+              <div class="text-right text-[11px]">
+                <p class="text-slate-500">Periode kegiatan</p>
+                <p class="font-semibold text-slate-800">Minggu ke-2 November</p>
+                <p class="text-slate-500">Upload: 15 November 2025 • 14.30</p>
+              </div>
+            </div>
+
+            <div class="mt-3 grid gap-3 md:grid-cols-[minmax(0,1.3fr)_minmax(0,0.9fr)]">
+              <div class="space-y-2">
+                <div class="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2">
+                  <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-mabisa-100 text-[11px] font-semibold text-mabisa-700">
+                    PDF
+                  </div>
+                  <div class="text-[11px]">
+                    <p class="font-semibold text-slate-800">
+                      rekap-kegiatan-sosial-rt01-minggu2-nov2025.pdf
+                    </p>
+                    <p class="text-slate-500">
+                      4 halaman • berisi daftar hadir & dokumentasi ringkas.
+                    </p>
+                  </div>
+                </div>
+                <div class="aspect-video w-full rounded-2xl border border-slate-200 bg-slate-100 flex items-center justify-center text-[11px] text-slate-400">
+                  Pratinjau PDF (dummy) — di sistem asli bisa pakai &lt;iframe&gt; atau JS PDF viewer
+                </div>
+              </div>
+
+              <div class="space-y-2 text-[11px]">
+                <div>
+                  <p class="text-slate-500">Status verifikasi</p>
+                  <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 font-medium text-emerald-700">
+                    ✅ Disetujui
+                  </span>
+                </div>
+                <div>
+                  <p class="text-slate-500">Catatan verifikator</p>
+                  <p class="text-slate-700">
+                    “Rekap rapi dan format sudah sesuai panduan administrasi sosial.”
+                  </p>
+                </div>
+                <div>
+                  <p class="text-slate-500">Jejak verifikasi</p>
+                  <ul class="list-disc pl-4 text-[11px] text-slate-600">
+                    <li>Dicek oleh staf kecamatan: 17 Nov 2025</li>
+                    <li>Disimpan sebagai arsip di SIGAP BRIDA</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Evidence 5: Administrasi (PDF, revisi/perbaikan) -->
+          <article
+            class="evidence-card rounded-3xl border border-slate-200 bg-white p-4 shadow-soft"
+            data-kategori="Administrasi"
+            data-status="revised"
+            data-title="laporan administrasi bulanan"
+            data-type="pdf"
+          >
+            <div class="flex flex-wrap items-start justify-between gap-3">
+              <div>
+                <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+                  Administrasi • Indikator 1
+                </p>
+                <h2 class="text-sm font-semibold text-slate-900">
+                  Laporan administrasi bulanan
+                </h2>
+                <p class="text-[11px] text-slate-500">
+                  Laporan PDF mengenai mutasi kependudukan (lahir, meninggal, pindah, datang) dan administrasi lainnya.
+                </p>
+              </div>
+              <div class="text-right text-[11px]">
+                <p class="text-slate-500">Periode laporan</p>
+                <p class="font-semibold text-slate-800">November 2025</p>
+                <p class="text-slate-500">
+                  Upload awal: 08 Nov 2025 • Revisi: 12 Nov 2025
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-3 grid gap-3 md:grid-cols-[minmax(0,1.3fr)_minmax(0,0.9fr)]">
+              <div class="space-y-2">
+                <div class="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2">
+                  <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-mabisa-100 text-[11px] font-semibold text-mabisa-700">
+                    PDF
+                  </div>
+                  <div class="text-[11px]">
+                    <p class="font-semibold text-slate-800">
+                      laporan-administrasi-bulanan-rt01-nov2025-revisi.pdf
+                    </p>
+                    <p class="text-slate-500">
+                      6 halaman • versi revisi dengan lampiran lengkap.
+                    </p>
+                  </div>
+                </div>
+                <div class="aspect-video w-full rounded-2xl border border-dashed border-amber-200 bg-amber-50/60 flex items-center justify-center text-[11px] text-amber-700">
+                  Pratinjau PDF (revisi) — placeholder
+                </div>
+              </div>
+
+              <div class="space-y-2 text-[11px]">
+                <div>
+                  <p class="text-slate-500">Status verifikasi akhir</p>
+                  <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 font-medium text-emerald-700">
+                    ✅ Disetujui setelah perbaikan
+                  </span>
+                </div>
+                <div>
+                  <p class="text-slate-500">Catatan verifikator</p>
+                  <ul class="list-disc pl-4 text-[11px] text-slate-700">
+                    <li>
+                      Catatan awal: “Beberapa lampiran belum ditandatangani, mohon dilengkapi.”
+                    </li>
+                    <li>
+                      Catatan akhir: “Lampiran sudah lengkap dan sesuai format administrasi.”
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <p class="text-slate-500">Jejak verifikasi</p>
+                  <ul class="list-disc pl-4 text-[11px] text-slate-600">
+                    <li>Permintaan perbaikan dikirim: 09 Nov 2025</li>
+                    <li>Revisi diupload: 12 Nov 2025</li>
+                    <li>Disetujui Lurah & Camat: 13 Nov 2025</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    // Sidebar mobile
+    var sidebar = document.getElementById('sidebar');
+    var sidebarOpen = document.getElementById('sidebar-open');
+    var sidebarClose = document.getElementById('sidebar-close');
+
+    if (window.innerWidth < 768) {
+      sidebar.classList.add('-translate-x-full');
+    }
+
+    if (sidebarOpen) {
+      sidebarOpen.addEventListener('click', function () {
+        sidebar.classList.remove('-translate-x-full');
+      });
+    }
+    if (sidebarClose) {
+      sidebarClose.addEventListener('click', function () {
+        sidebar.classList.add('-translate-x-full');
+      });
+    }
+
+    // Filter evidence
+    var filterKategori = document.getElementById('filterKategori');
+    var filterStatus = document.getElementById('filterStatus');
+    var searchJudul = document.getElementById('searchJudul');
+    var cards = document.querySelectorAll('.evidence-card');
+
+    function applyFilter() {
+      var kat = filterKategori.value;
+      var st = filterStatus.value;
+      var q = (searchJudul.value || '').toLowerCase();
+
+      cards.forEach(function (card) {
+        var cKat = card.getAttribute('data-kategori');
+        var cSt = card.getAttribute('data-status');
+        var cTitle = (card.getAttribute('data-title') || '').toLowerCase();
+
+        var visible = true;
+        if (kat !== 'all' && cKat !== kat) visible = false;
+        if (st !== 'all' && cSt !== st) visible = false;
+        if (q && !cTitle.includes(q)) visible = false;
+
+        card.classList.toggle('hidden', !visible);
+      });
+    }
+
+    filterKategori.addEventListener('change', applyFilter);
+    filterStatus.addEventListener('change', applyFilter);
+    searchJudul.addEventListener('input', applyFilter);
+  </script>
+</body>
+</html>

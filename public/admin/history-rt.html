@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Riwayat Bukti RT/RW — MABISA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            mabisa: {
+              50: '#fdf5f5',
+              100: '#fae5e6',
+              200: '#f3c7ca',
+              300: '#e89aa0',
+              400: '#d86872',
+              500: '#b1333f',
+              600: '#8f2633',
+              700: '#6e1d28',
+              800: '#4a151d',
+              900: '#2e0e14',
+            },
+          },
+          boxShadow: {
+            soft: '0 18px 45px rgba(15,23,42,0.08)',
+          },
+          borderRadius: {
+            '3xl': '1.75rem',
+          },
+        },
+      },
+    };
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-900">
+  <!-- Background lembut -->
+  <div class="pointer-events-none fixed inset-0 -z-10">
+    <div class="absolute -top-32 -right-16 h-72 w-72 rounded-full bg-mabisa-100 opacity-70 blur-3xl"></div>
+    <div class="absolute -bottom-32 -left-20 h-80 w-80 rounded-full bg-mabisa-50 opacity-80 blur-3xl"></div>
+  </div>
+
+  <div class="flex min-h-screen">
+    <!-- SIDEBAR (RT/RW) -->
+    <aside
+      id="sidebar"
+      class="fixed inset-y-0 left-0 z-30 flex w-64 flex-col border-r border-slate-200 bg-white px-4 py-4 shadow-soft transition-transform duration-200 md:static md:translate-x-0"
+    >
+      <!-- Logo + close (mobile) -->
+      <div class="mb-6 flex items-center justify-between gap-2">
+        <div class="flex items-center gap-3">
+          <div class="flex h-9 w-9 items-center justify-center rounded-2xl bg-mabisa-500 text-white shadow-soft">
+            <span class="text-xs font-semibold tracking-tight">MB</span>
+          </div>
+          <div class="leading-tight">
+            <p class="text-sm font-semibold tracking-tight text-slate-900">MABISA</p>
+            <p class="text-[11px] text-slate-500">Makassar Bukti &amp; Insentif</p>
+          </div>
+        </div>
+        <button
+          id="sidebar-close"
+          class="rounded-lg border border-slate-200 bg-slate-50 p-1 text-slate-600 md:hidden"
+        >
+          ✕
+        </button>
+      </div>
+
+      <!-- Info user RT/RW -->
+      <div class="mb-4 rounded-2xl border border-slate-200 bg-slate-50 p-3 text-xs">
+        <div class="flex items-center gap-3">
+          <div class="flex h-9 w-9 items-center justify-center rounded-full bg-mabisa-50 text-mabisa-700 text-xs font-semibold">
+            RT
+          </div>
+          <div class="flex-1">
+            <p class="text-[13px] font-semibold text-slate-900">Pak Ahmad</p>
+            <p class="text-[11px] text-slate-500">Ketua RT 01 / RW 05</p>
+          </div>
+        </div>
+        <p class="mt-2 text-[11px] text-slate-500">
+          Kel. Panakkukang • Kec. Panakkukang • Kota Makassar
+        </p>
+      </div>
+
+      <!-- Menu -->
+      <nav class="flex-1 space-y-5 text-sm">
+        <div>
+          <p class="mb-1 px-2 text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+            Navigasi
+          </p>
+          <ul class="space-y-1">
+            <li>
+              <a
+                href="#"
+                class="flex items-center gap-2 rounded-xl px-3 py-2 text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+              >
+                <span>🏠</span><span>Beranda RT/RW</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="mabisa-bukti-rt.html"
+                class="flex items-center gap-2 rounded-xl px-3 py-2 text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+              >
+                <span>📷</span><span>Bukti RT/RW</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="flex items-center gap-2 rounded-xl bg-mabisa-50 px-3 py-2 font-medium text-mabisa-700"
+              >
+                <span>🧾</span><span>Riwayat bukti</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="flex items-center gap-2 rounded-xl px-3 py-2 text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+              >
+                <span>👤</span><span>Profil saya</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="mt-4 border-t border-slate-200 pt-3 text-[11px] text-slate-500">
+        <p>Bagian dari ekosistem <span class="font-semibold text-slate-800">SIGAP BRIDA</span>.</p>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="flex flex-1 flex-col">
+      <!-- Top bar -->
+      <header class="sticky top-0 z-20 border-b border-slate-200 bg-white/80 backdrop-blur-md">
+        <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+          <div>
+            <p class="text-xs font-medium uppercase tracking-wider text-slate-500">
+              Panel RT/RW
+            </p>
+            <h1 class="text-lg font-semibold text-slate-900">
+              Riwayat bukti RT 01 / RW 05
+            </h1>
+            <p class="text-[11px] text-slate-500">
+              Lihat rekam jejak bukti yang sudah dikirim setiap bulan dan status verifikasinya.
+            </p>
+          </div>
+          <button
+            id="sidebar-open"
+            class="inline-flex items-center rounded-lg border border-slate-200 bg-white p-1.5 text-slate-700 md:hidden"
+          >
+            ☰
+          </button>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <main class="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-8 px-4 py-6">
+        <!-- Ringkasan riwayat -->
+        <section class="grid gap-4 md:grid-cols-3">
+          <div class="rounded-3xl border border-slate-200 bg-white p-4 shadow-soft/40 text-xs">
+            <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+              Total bulan terekam
+            </p>
+            <p class="mt-2 text-2xl font-semibold text-slate-900">12</p>
+            <p class="mt-1 text-[11px] text-slate-500">
+              Riwayat 12 bulan terakhir tersimpan di MABISA.
+            </p>
+          </div>
+          <div class="rounded-3xl border border-slate-200 bg-white p-4 shadow-soft/40 text-xs">
+            <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+              Bulan lengkap disetujui
+            </p>
+            <p class="mt-2 text-2xl font-semibold text-emerald-600">7</p>
+            <p class="mt-1 text-[11px] text-slate-500">
+              Semua indikator dinyatakan sah oleh verifikator.
+            </p>
+          </div>
+          <div class="rounded-3xl border border-slate-200 bg-white p-4 shadow-soft/40 text-xs">
+            <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+              Bulan perlu perhatian
+            </p>
+            <p class="mt-2 text-2xl font-semibold text-amber-600">3</p>
+            <p class="mt-1 text-[11px] text-slate-500">
+              Terdapat bukti yang ditolak atau diminta perbaikan.
+            </p>
+          </div>
+        </section>
+
+        <!-- Filter tahun & status -->
+        <section class="rounded-3xl border border-slate-200 bg-white p-4 shadow-soft">
+          <div class="flex flex-wrap items-center justify-between gap-3 text-[11px]">
+            <div class="space-y-1">
+              <p class="font-semibold uppercase tracking-wider text-slate-500">
+                Filter riwayat
+              </p>
+              <p class="text-slate-600">
+                Pilih tahun atau status untuk melihat riwayat tertentu.
+              </p>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+              <select
+                id="filterTahun"
+                class="rounded-xl border border-slate-200 bg-slate-50 px-3 py-1.5 text-[11px] text-slate-700"
+              >
+                <option value="all">Semua tahun</option>
+                <option value="2025" selected>2025</option>
+                <option value="2024">2024</option>
+              </select>
+              <select
+                id="filterStatus"
+                class="rounded-xl border border-slate-200 bg-slate-50 px-3 py-1.5 text-[11px] text-slate-700"
+              >
+                <option value="all">Semua status</option>
+                <option value="draft">Belum dikirim</option>
+                <option value="waiting">Menunggu verifikasi</option>
+                <option value="partial">Sebagian disetujui</option>
+                <option value="approved">Lengkap disetujui</option>
+                <option value="issue">Perlu perbaikan</option>
+              </select>
+              <div class="relative">
+                <span class="pointer-events-none absolute inset-y-0 left-2 flex items-center text-[11px] text-slate-400">🔍</span>
+                <input
+                  id="searchPeriode"
+                  type="text"
+                  class="w-36 rounded-xl border border-slate-200 bg-slate-50 pl-6 pr-2 py-1.5 text-[11px] text-slate-700 focus:border-mabisa-300 focus:outline-none focus:ring-1 focus:ring-mabisa-200"
+                  placeholder="Cari bulan..."
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Tabel riwayat per bulan -->
+        <section class="rounded-3xl border border-slate-200 bg-white p-4 shadow-soft">
+          <div class="mb-3 flex items-center justify-between gap-2">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                Riwayat bulanan
+              </p>
+              <p class="text-sm font-semibold text-slate-900">
+                Rekap bukti per bulan
+              </p>
+            </div>
+            <button
+              class="rounded-xl border border-slate-200 bg-slate-50 px-3 py-1.5 text-[11px] text-slate-700 hover:border-mabisa-200 hover:bg-mabisa-50/60"
+            >
+              ⬇ Unduh rekap (PDF)
+            </button>
+          </div>
+
+          <div class="overflow-hidden rounded-2xl border border-slate-200">
+            <table class="min-w-full border-collapse text-xs">
+              <thead class="bg-slate-50 text-[11px] uppercase tracking-wide text-slate-500">
+                <tr>
+                  <th class="px-3 py-2 text-left">Periode</th>
+                  <th class="px-3 py-2 text-left">Status pengiriman</th>
+                  <th class="px-3 py-2 text-left">Ringkasan bukti</th>
+                  <th class="px-3 py-2 text-left">Status insentif</th>
+                  <th class="px-3 py-2 text-center">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="historyBody" class="divide-y divide-slate-100">
+                <!-- Contoh data, bisa nanti diganti @foreach -->
+                <tr
+                  data-tahun="2025"
+                  data-status="waiting"
+                  data-periode="November 2025"
+                >
+                  <td class="px-3 py-2 align-top">
+                    <p class="font-semibold text-slate-900">November 2025</p>
+                    <p class="text-[11px] text-slate-500">
+                      Periode berjalan • Batas kirim: 25 Nov 2025
+                    </p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <span class="rounded-full bg-amber-50 px-2 py-0.5 text-[11px] font-medium text-amber-700">
+                      Menunggu verifikasi
+                    </span>
+                    <p class="mt-1 text-[11px] text-slate-500">
+                      Terkirim ke Lurah pada 24 Nov 2025
+                    </p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <p class="text-[11px] text-slate-700">
+                      4 indikator • 4 bukti terkirim
+                    </p>
+                    <p class="text-[11px] text-slate-500">
+                      0 disetujui • 0 ditolak • 0 perbaikan
+                    </p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <span class="rounded-full bg-slate-50 px-2 py-0.5 text-[11px] text-slate-600">
+                      Dalam proses
+                    </span>
+                  </td>
+                  <td class="px-3 py-2 align-top text-center">
+                    <a
+                      href="#"
+                      class="inline-flex items-center gap-1 rounded-full bg-mabisa-500 px-3 py-1.5 text-[11px] font-semibold text-white hover:bg-mabisa-600"
+                    >
+                      👁 Lihat
+                    </a>
+                  </td>
+                </tr>
+
+                <tr
+                  data-tahun="2025"
+                  data-status="approved"
+                  data-periode="Oktober 2025"
+                >
+                  <td class="px-3 py-2 align-top">
+                    <p class="font-semibold text-slate-900">Oktober 2025</p>
+                    <p class="text-[11px] text-slate-500">
+                      Periode lampau
+                    </p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <span class="rounded-full bg-emerald-50 px-2 py-0.5 text-[11px] font-medium text-emerald-700">
+                      Lengkap disetujui
+                    </span>
+                    <p class="mt-1 text-[11px] text-slate-500">
+                      Diverifikasi penuh oleh Lurah & Camat
+                    </p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <p class="text-[11px] text-slate-700">
+                      4 indikator • 4 bukti sah
+                    </p>
+                    <p class="text-[11px] text-slate-500">
+                      4 disetujui • 0 ditolak • 0 perbaikan
+                    </p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <span class="rounded-full bg-emerald-50 px-2 py-0.5 text-[11px] font-medium text-emerald-700">
+                      Insentif diberikan
+                    </span>
+                  </td>
+                  <td class="px-3 py-2 align-top text-center">
+                    <a
+                      href="#"
+                      class="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-[11px] text-slate-700 hover:border-mabisa-200 hover:bg-mabisa-50/60"
+                    >
+                      👁 Lihat
+                    </a>
+                  </td>
+                </tr>
+
+                <tr
+                  data-tahun="2025"
+                  data-status="issue"
+                  data-periode="September 2025"
+                >
+                  <td class="px-3 py-2 align-top">
+                    <p class="font-semibold text-slate-900">September 2025</p>
+                    <p class="text-[11px] text-slate-500">
+                      Periode lampau
+                    </p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <span class="rounded-full bg-rose-50 px-2 py-0.5 text-[11px] font-medium text-rose-700">
+                      Perlu perbaikan
+                    </span>
+                    <p class="mt-1 text-[11px] text-slate-500">
+                      1 indikator diminta perbaikan bukti
+                    </p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <p class="text-[11px] text-slate-700">
+                      4 indikator • 3 bukti sah • 1 revisi
+                    </p>
+                    <p class="text-[11px] text-slate-500">
+                      3 disetujui • 0 ditolak • 1 perbaikan
+                    </p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <span class="rounded-full bg-amber-50 px-2 py-0.5 text-[11px] font-medium text-amber-700">
+                      Insentif tertahan
+                    </span>
+                  </td>
+                  <td class="px-3 py-2 align-top text-center">
+                    <a
+                      href="#"
+                      class="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-[11px] text-slate-700 hover:border-mabisa-200 hover:bg-mabisa-50/60"
+                    >
+                      👁 Lihat
+                    </a>
+                  </td>
+                </tr>
+
+                <tr
+                  data-tahun="2025"
+                  data-status="partial"
+                  data-periode="Agustus 2025"
+                >
+                  <td class="px-3 py-2 align-top">
+                    <p class="font-semibold text-slate-900">Agustus 2025</p>
+                    <p class="text-[11px] text-slate-500">
+                      Periode lampau
+                    </p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <span class="rounded-full bg-sky-50 px-2 py-0.5 text-[11px] font-medium text-sky-700">
+                      Sebagian disetujui
+                    </span>
+                    <p class="mt-1 text-[11px] text-slate-500">
+                      Ada bukti yang ditolak & tidak dikirim ulang
+                    </p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <p class="text-[11px] text-slate-700">
+                      4 indikator • 3 bukti sah • 1 ditolak
+                    </p>
+                    <p class="text-[11px] text-slate-500">
+                      3 disetujui • 1 ditolak • 0 perbaikan
+                    </p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <span class="rounded-full bg-slate-50 px-2 py-0.5 text-[11px] text-slate-600">
+                      Insentif dipertimbangkan
+                    </span>
+                  </td>
+                  <td class="px-3 py-2 align-top text-center">
+                    <a
+                      href="#"
+                      class="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-[11px] text-slate-700 hover:border-mabisa-200 hover:bg-mabisa-50/60"
+                    >
+                      👁 Lihat
+                    </a>
+                  </td>
+                </tr>
+
+                <tr
+                  data-tahun="2024"
+                  data-status="approved"
+                  data-periode="Desember 2024"
+                >
+                  <td class="px-3 py-2 align-top">
+                    <p class="font-semibold text-slate-900">Desember 2024</p>
+                    <p class="text-[11px] text-slate-500">
+                      Tahun sebelumnya
+                    </p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <span class="rounded-full bg-emerald-50 px-2 py-0.5 text-[11px] font-medium text-emerald-700">
+                      Lengkap disetujui
+                    </span>
+                    <p class="mt-1 text-[11px] text-slate-500">
+                      Semua bukti tervalidasi
+                    </p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <p class="text-[11px] text-slate-700">
+                      4 indikator • 4 bukti sah
+                    </p>
+                    <p class="text-[11px] text-slate-500">
+                      4 disetujui • 0 ditolak • 0 perbaikan
+                    </p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <span class="rounded-full bg-emerald-50 px-2 py-0.5 text-[11px] font-medium text-emerald-700">
+                      Insentif diberikan
+                    </span>
+                  </td>
+                  <td class="px-3 py-2 align-top text-center">
+                    <a
+                      href="#"
+                      class="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-[11px] text-slate-700 hover:border-mabisa-200 hover:bg-mabisa-50/60"
+                    >
+                      👁 Lihat
+                    </a>
+                  </td>
+                </tr>
+
+                <!-- Bisa ditambah baris lain untuk 12 bulan dst -->
+              </tbody>
+            </table>
+          </div>
+
+          <p class="mt-3 text-[11px] text-slate-500">
+            Tombol <strong>“Lihat”</strong> dapat diarahkan ke halaman detail riwayat, misalnya
+            <code>/rt/history/2025/11</code> untuk melihat semua evidence bulan tersebut.
+          </p>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    // Sidebar mobile
+    var sidebar = document.getElementById('sidebar');
+    var sidebarOpen = document.getElementById('sidebar-open');
+    var sidebarClose = document.getElementById('sidebar-close');
+
+    if (window.innerWidth < 768) {
+      sidebar.classList.add('-translate-x-full');
+    }
+
+    if (sidebarOpen) {
+      sidebarOpen.addEventListener('click', function () {
+        sidebar.classList.remove('-translate-x-full');
+      });
+    }
+    if (sidebarClose) {
+      sidebarClose.addEventListener('click', function () {
+        sidebar.classList.add('-translate-x-full');
+      });
+    }
+
+    // Filter riwayat
+    var filterTahun = document.getElementById('filterTahun');
+    var filterStatus = document.getElementById('filterStatus');
+    var searchPeriode = document.getElementById('searchPeriode');
+    var historyRows = document.querySelectorAll('#historyBody tr');
+
+    function applyHistoryFilter() {
+      var tahun = filterTahun.value;
+      var status = filterStatus.value;
+      var q = (searchPeriode.value || '').toLowerCase();
+
+      historyRows.forEach(function (row) {
+        var rowTahun = row.getAttribute('data-tahun');
+        var rowStatus = row.getAttribute('data-status');
+        var periode = (row.getAttribute('data-periode') || '').toLowerCase();
+
+        var visible = true;
+
+        if (tahun !== 'all' && rowTahun !== tahun) visible = false;
+        if (status !== 'all' && rowStatus !== status) visible = false;
+        if (q && !periode.includes(q)) visible = false;
+
+        row.classList.toggle('hidden', !visible);
+      });
+    }
+
+    filterTahun.addEventListener('change', applyHistoryFilter);
+    filterStatus.addEventListener('change', applyHistoryFilter);
+    searchPeriode.addEventListener('input', applyHistoryFilter);
+
+    // Inisialisasi filter (supaya yang 2025 langsung kelihatan utama)
+    applyHistoryFilter();
+  </script>
+</body>
+</html>

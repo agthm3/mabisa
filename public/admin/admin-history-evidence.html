@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>History Evidence RT/RW — Admin MABISA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            mabisa: {
+              50: '#fdf5f5',
+              100: '#fae5e6',
+              200: '#f3c7ca',
+              300: '#e89aa0',
+              400: '#d86872',
+              500: '#b1333f',
+              600: '#8f2633',
+              700: '#6e1d28',
+              800: '#4a151d',
+              900: '#2e0e14',
+            },
+          },
+          boxShadow: {
+            soft: '0 18px 45px rgba(15,23,42,0.08)',
+          },
+          borderRadius: {
+            '3xl': '1.75rem',
+          },
+        },
+      },
+    };
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-900">
+  <!-- Background lembut -->
+  <div class="pointer-events-none fixed inset-0 -z-10">
+    <div class="absolute -top-32 -right-16 h-72 w-72 rounded-full bg-mabisa-100 opacity-70 blur-3xl"></div>
+    <div class="absolute -bottom-32 -left-20 h-80 w-80 rounded-full bg-mabisa-50 opacity-80 blur-3xl"></div>
+  </div>
+
+  <div class="flex min-h-screen">
+    <!-- SIDEBAR ADMIN -->
+    <aside
+      id="sidebar"
+      class="fixed inset-y-0 left-0 z-30 flex w-64 flex-col border-r border-slate-200 bg-white px-4 py-4 shadow-soft transition-transform duration-200 md:static md:translate-x-0"
+    >
+      <!-- Logo + close (mobile) -->
+      <div class="mb-6 flex items-center justify-between gap-2">
+        <div class="flex items-center gap-3">
+          <div class="flex h-9 w-9 items-center justify-center rounded-2xl bg-mabisa-500 text-white shadow-soft">
+            <span class="text-xs font-semibold tracking-tight">MB</span>
+          </div>
+          <div class="leading-tight">
+            <p class="text-sm font-semibold tracking-tight text-slate-900">MABISA</p>
+            <p class="text-[11px] text-slate-500">Makassar Bukti &amp; Insentif</p>
+          </div>
+        </div>
+        <button
+          id="sidebar-close"
+          class="rounded-lg border border-slate-200 bg-slate-50 p-1 text-slate-600 md:hidden"
+        >
+          ✕
+        </button>
+      </div>
+
+      <!-- Info admin -->
+      <div class="mb-4 rounded-2xl border border-slate-200 bg-slate-50 p-3 text-xs">
+        <div class="flex items-center gap-3">
+          <div class="flex h-9 w-9 items-center justify-center rounded-full bg-mabisa-50 text-mabisa-700 text-xs font-semibold">
+            AD
+          </div>
+          <div class="flex-1">
+            <p class="text-[13px] font-semibold text-slate-900">Admin Kota</p>
+            <p class="text-[11px] text-slate-500">BRIDA / Bag. Pemerintahan</p>
+          </div>
+        </div>
+        <p class="mt-2 text-[11px] text-slate-500">
+          Akses: Monitoring global bukti RT/RW & insentif.
+        </p>
+      </div>
+
+      <!-- Menu -->
+      <nav class="flex-1 space-y-5 text-sm">
+        <div>
+          <p class="mb-1 px-2 text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+            Navigasi
+          </p>
+          <ul class="space-y-1">
+            <li>
+              <a
+                href="#"
+                class="flex items-center gap-2 rounded-xl px-3 py-2 text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+              >
+                <span>📊</span><span>Dashboard Admin</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="flex items-center gap-2 rounded-xl px-3 py-2 text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+              >
+                <span>👥</span><span>Manajemen RT/RW</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="flex items-center gap-2 rounded-xl px-3 py-2 text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+              >
+                <span>✅</span><span>Panel Verifikator</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="flex items-center gap-2 rounded-xl bg-mabisa-50 px-3 py-2 font-medium text-mabisa-700"
+              >
+                <span>🧾</span><span>History Evidence</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="mt-4 border-t border-slate-200 pt-3 text-[11px] text-slate-500">
+        <p>Bagian dari ekosistem <span class="font-semibold text-slate-800">SIGAP BRIDA</span>.</p>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="flex flex-1 flex-col">
+      <!-- Top bar -->
+      <header class="sticky top-0 z-20 border-b border-slate-200 bg-white/80 backdrop-blur-md">
+        <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+          <div>
+            <p class="text-xs font-medium uppercase tracking-wider text-slate-500">
+              Admin MABISA
+            </p>
+            <h1 class="text-lg font-semibold text-slate-900">
+              History Evidence RT/RW — Kota Makassar
+            </h1>
+            <p class="text-[11px] text-slate-500">
+              Monitoring pengiriman bukti per RT/RW per bulan, lengkap dengan status verifikasi & insentif.
+            </p>
+          </div>
+          <button
+            id="sidebar-open"
+            class="inline-flex items-center rounded-lg border border-slate-200 bg-white p-1.5 text-slate-700 md:hidden"
+          >
+            ☰
+          </button>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <main class="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-8 px-4 py-6">
+        <!-- Ringkasan -->
+        <section class="grid gap-4 md:grid-cols-3">
+          <div class="rounded-3xl border border-slate-200 bg-white p-4 shadow-soft/40 text-xs">
+            <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+              Total record bulan
+            </p>
+            <p class="mt-2 text-2xl font-semibold text-slate-900">128</p>
+            <p class="mt-1 text-[11px] text-slate-500">
+              Kombinasi RT/RW × bulan yang tercatat di sistem.
+            </p>
+          </div>
+          <div class="rounded-3xl border border-slate-200 bg-white p-4 shadow-soft/40 text-xs">
+            <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+              Bulan lengkap disetujui
+            </p>
+            <p class="mt-2 text-2xl font-semibold text-emerald-600">86</p>
+            <p class="mt-1 text-[11px] text-slate-500">
+              Seluruh indikator disetujui verifikator.
+            </p>
+          </div>
+          <div class="rounded-3xl border border-slate-200 bg-white p-4 shadow-soft/40 text-xs">
+            <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+              Perlu perhatian
+            </p>
+            <p class="mt-2 text-2xl font-semibold text-amber-600">19</p>
+            <p class="mt-1 text-[11px] text-slate-500">
+              Ada bukti yang ditolak atau belum dikirim.
+            </p>
+          </div>
+        </section>
+
+        <!-- Filter global -->
+        <section class="rounded-3xl border border-slate-200 bg-white p-4 shadow-soft">
+          <div class="flex flex-wrap items-center justify-between gap-3 text-[11px]">
+            <div class="space-y-1">
+              <p class="font-semibold uppercase tracking-wider text-slate-500">
+                Filter & pencarian
+              </p>
+              <p class="text-slate-600">
+                Gunakan filter untuk fokus ke kecamatan, kelurahan, atau status tertentu.
+              </p>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+              <select
+                id="filterTahun"
+                class="rounded-xl border border-slate-200 bg-slate-50 px-3 py-1.5 text-[11px] text-slate-700"
+              >
+                <option value="all">Semua tahun</option>
+                <option value="2025" selected>2025</option>
+                <option value="2024">2024</option>
+              </select>
+              <select
+                id="filterKecamatan"
+                class="rounded-xl border border-slate-200 bg-slate-50 px-3 py-1.5 text-[11px] text-slate-700"
+              >
+                <option value="all">Semua kecamatan</option>
+                <option value="Panakkukang">Panakkukang</option>
+                <option value="Rappocini">Rappocini</option>
+                <option value="Biringkanaya">Biringkanaya</option>
+              </select>
+              <select
+                id="filterKelurahan"
+                class="rounded-xl border border-slate-200 bg-slate-50 px-3 py-1.5 text-[11px] text-slate-700"
+              >
+                <option value="all">Semua kelurahan</option>
+                <option value="Panakkukang">Panakkukang</option>
+                <option value="Karunrung">Karunrung</option>
+                <option value="Tamamaung">Tamamaung</option>
+              </select>
+              <select
+                id="filterStatus"
+                class="rounded-xl border border-slate-200 bg-slate-50 px-3 py-1.5 text-[11px] text-slate-700"
+              >
+                <option value="all">Semua status</option>
+                <option value="draft">Belum dikirim</option>
+                <option value="waiting">Menunggu verifikasi</option>
+                <option value="partial">Sebagian disetujui</option>
+                <option value="approved">Lengkap disetujui</option>
+                <option value="issue">Perlu perbaikan</option>
+              </select>
+              <div class="relative">
+                <span class="pointer-events-none absolute inset-y-0 left-2 flex items-center text-[11px] text-slate-400">🔍</span>
+                <input
+                  id="searchRtRw"
+                  type="text"
+                  class="w-44 rounded-xl border border-slate-200 bg-slate-50 pl-6 pr-2 py-1.5 text-[11px] text-slate-700 focus:border-mabisa-300 focus:outline-none focus:ring-1 focus:ring-mabisa-200"
+                  placeholder="Cari RT/RW, nama RT, kelurahan..."
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Tabel history -->
+        <section class="rounded-3xl border border-slate-200 bg-white p-4 shadow-soft">
+          <div class="mb-3 flex items-center justify-between gap-2">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                History evidence per RT/RW
+              </p>
+              <p class="text-sm font-semibold text-slate-900">
+                Rekap bukti bulanan per RT/RW
+              </p>
+            </div>
+            <button
+              class="rounded-xl border border-slate-200 bg-slate-50 px-3 py-1.5 text-[11px] text-slate-700 hover:border-mabisa-200 hover:bg-mabisa-50/60"
+            >
+              ⬇ Export (CSV)
+            </button>
+          </div>
+
+          <div class="overflow-hidden rounded-2xl border border-slate-200">
+            <table class="min-w-full border-collapse text-xs">
+              <thead class="bg-slate-50 text-[11px] uppercase tracking-wide text-slate-500">
+                <tr>
+                  <th class="px-3 py-2 text-left">Periode</th>
+                  <th class="px-3 py-2 text-left">RT/RW &amp; wilayah</th>
+                  <th class="px-3 py-2 text-left">Status bukti</th>
+                  <th class="px-3 py-2 text-left">Ringkasan verifikasi</th>
+                  <th class="px-3 py-2 text-left">Status insentif</th>
+                  <th class="px-3 py-2 text-center">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="historyBody" class="divide-y divide-slate-100">
+                <!-- Contoh baris data -->
+
+                <!-- 1: Panakkukang, RT01/RW05, November 2025 -->
+                <tr
+                  data-tahun="2025"
+                  data-kecamatan="Panakkukang"
+                  data-kelurahan="Panakkukang"
+                  data-status="approved"
+                  data-search="rt01 rw05 pak ahmad panakkukang"
+                >
+                  <td class="px-3 py-2 align-top">
+                    <p class="font-semibold text-slate-900">November 2025</p>
+                    <p class="text-[11px] text-slate-500">Periode berjalan</p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <p class="font-semibold text-slate-900">
+                      RT 01 / RW 05
+                    </p>
+                    <p class="text-[11px] text-slate-500">
+                      Kel. Panakkukang • Kec. Panakkukang
+                    </p>
+                    <p class="text-[11px] text-slate-500">
+                      Ketua: Pak Ahmad
+                    </p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <span class="rounded-full bg-emerald-50 px-2 py-0.5 text-[11px] font-medium text-emerald-700">
+                      Lengkap disetujui
+                    </span>
+                    <p class="mt-1 text-[11px] text-slate-500">
+                      Terkirim: 24 Nov 2025
+                    </p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <p class="text-[11px] text-slate-700">
+                      4 indikator • 4 bukti sah
+                    </p>
+                    <p class="text-[11px] text-slate-500">
+                      4 disetujui • 0 ditolak • 0 perbaikan
+                    </p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <span class="rounded-full bg-emerald-50 px-2 py-0.5 text-[11px] font-medium text-emerald-700">
+                      Insentif layak
+                    </span>
+                  </td>
+                  <td class="px-3 py-2 align-top text-center">
+                    <a
+                      href="#"
+                      class="inline-flex items-center gap-1 rounded-full bg-mabisa-500 px-3 py-1.5 text-[11px] font-semibold text-white hover:bg-mabisa-600"
+                    >
+                      👁 Lihat
+                    </a>
+                  </td>
+                </tr>
+
+                <!-- 2: Panakkukang, RT02/RW05, November 2025 (waiting) -->
+                <tr
+                  data-tahun="2025"
+                  data-kecamatan="Panakkukang"
+                  data-kelurahan="Panakkukang"
+                  data-status="waiting"
+                  data-search="rt02 rw05 bu siti panakkukang"
+                >
+                  <td class="px-3 py-2 align-top">
+                    <p class="font-semibold text-slate-900">November 2025</p>
+                    <p class="text-[11px] text-slate-500">Periode berjalan</p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <p class="font-semibold text-slate-900">
+                      RT 02 / RW 05
+                    </p>
+                    <p class="text-[11px] text-slate-500">
+                      Kel. Panakkukang • Kec. Panakkukang
+                    </p>
+                    <p class="text-[11px] text-slate-500">
+                      Ketua: Bu Siti
+                    </p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <span class="rounded-full bg-amber-50 px-2 py-0.5 text-[11px] font-medium text-amber-700">
+                      Menunggu verifikasi
+                    </span>
+                    <p class="mt-1 text-[11px] text-slate-500">
+                      Terkirim: 23 Nov 2025
+                    </p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <p class="text-[11px] text-slate-700">
+                      4 indikator • 4 bukti terkirim
+                    </p>
+                    <p class="text-[11px] text-slate-500">
+                      0 disetujui • 0 ditolak • 0 perbaikan
+                    </p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <span class="rounded-full bg-slate-50 px-2 py-0.5 text-[11px] text-slate-600">
+                      Dalam proses
+                    </span>
+                  </td>
+                  <td class="px-3 py-2 align-top text-center">
+                    <a
+                      href="#"
+                      class="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-[11px] text-slate-700 hover:border-mabisa-200 hover:bg-mabisa-50/60"
+                    >
+                      👁 Lihat
+                    </a>
+                  </td>
+                </tr>
+
+                <!-- 3: Rappocini, RT03/RW07, Oktober 2025 (issue) -->
+                <tr
+                  data-tahun="2025"
+                  data-kecamatan="Rappocini"
+                  data-kelurahan="Karunrung"
+                  data-status="issue"
+                  data-search="rt03 rw07 pak budi karunrung rappocini"
+                >
+                  <td class="px-3 py-2 align-top">
+                    <p class="font-semibold text-slate-900">Oktober 2025</p>
+                    <p class="text-[11px] text-slate-500">Periode lampau</p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <p class="font-semibold text-slate-900">
+                      RT 03 / RW 07
+                    </p>
+                    <p class="text-[11px] text-slate-500">
+                      Kel. Karunrung • Kec. Rappocini
+                    </p>
+                    <p class="text-[11px] text-slate-500">
+                      Ketua: Pak Budi
+                    </p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <span class="rounded-full bg-rose-50 px-2 py-0.5 text-[11px] font-medium text-rose-700">
+                      Perlu perbaikan
+                    </span>
+                    <p class="mt-1 text-[11px] text-slate-500">
+                      1 indikator diminta revisi
+                    </p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <p class="text-[11px] text-slate-700">
+                      4 indikator • 3 bukti sah • 1 revisi
+                    </p>
+                    <p class="text-[11px] text-slate-500">
+                      3 disetujui • 0 ditolak • 1 perbaikan
+                    </p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <span class="rounded-full bg-amber-50 px-2 py-0.5 text-[11px] font-medium text-amber-700">
+                      Insentif tertahan
+                    </span>
+                  </td>
+                  <td class="px-3 py-2 align-top text-center">
+                    <a
+                      href="#"
+                      class="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-[11px] text-slate-700 hover:border-mabisa-200 hover:bg-mabisa-50/60"
+                    >
+                      👁 Lihat
+                    </a>
+                  </td>
+                </tr>
+
+                <!-- 4: Biringkanaya, RT05/RW02, September 2025 (partial) -->
+                <tr
+                  data-tahun="2025"
+                  data-kecamatan="Biringkanaya"
+                  data-kelurahan="Tamamaung"
+                  data-status="partial"
+                  data-search="rt05 rw02 bu lina tamamaung biringkanaya"
+                >
+                  <td class="px-3 py-2 align-top">
+                    <p class="font-semibold text-slate-900">September 2025</p>
+                    <p class="text-[11px] text-slate-500">Periode lampau</p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <p class="font-semibold text-slate-900">
+                      RT 05 / RW 02
+                    </p>
+                    <p class="text-[11px] text-slate-500">
+                      Kel. Tamamaung • Kec. Biringkanaya
+                    </p>
+                    <p class="text-[11px] text-slate-500">
+                      Ketua: Bu Lina
+                    </p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <span class="rounded-full bg-sky-50 px-2 py-0.5 text-[11px] font-medium text-sky-700">
+                      Sebagian disetujui
+                    </span>
+                    <p class="mt-1 text-[11px] text-slate-500">
+                      Ada bukti yang ditolak & tidak dikirim ulang
+                    </p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <p class="text-[11px] text-slate-700">
+                      4 indikator • 3 bukti sah • 1 ditolak
+                    </p>
+                    <p class="text-[11px] text-slate-500">
+                      3 disetujui • 1 ditolak • 0 perbaikan
+                    </p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <span class="rounded-full bg-slate-50 px-2 py-0.5 text-[11px] text-slate-600">
+                      Insentif dipertimbangkan
+                    </span>
+                  </td>
+                  <td class="px-3 py-2 align-top text-center">
+                    <a
+                      href="#"
+                      class="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-[11px] text-slate-700 hover:border-mabisa-200 hover:bg-mabisa-50/60"
+                    >
+                      👁 Lihat
+                    </a>
+                  </td>
+                </tr>
+
+                <!-- 5: Panakkukang, RT04/RW05, Desember 2024 (approved) -->
+                <tr
+                  data-tahun="2024"
+                  data-kecamatan="Panakkukang"
+                  data-kelurahan="Panakkukang"
+                  data-status="approved"
+                  data-search="rt04 rw05 pak rahmat panakkukang"
+                >
+                  <td class="px-3 py-2 align-top">
+                    <p class="font-semibold text-slate-900">Desember 2024</p>
+                    <p class="text-[11px] text-slate-500">Tahun sebelumnya</p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <p class="font-semibold text-slate-900">
+                      RT 04 / RW 05
+                    </p>
+                    <p class="text-[11px] text-slate-500">
+                      Kel. Panakkukang • Kec. Panakkukang
+                    </p>
+                    <p class="text-[11px] text-slate-500">
+                      Ketua: Pak Rahmat
+                    </p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <span class="rounded-full bg-emerald-50 px-2 py-0.5 text-[11px] font-medium text-emerald-700">
+                      Lengkap disetujui
+                    </span>
+                    <p class="mt-1 text-[11px] text-slate-500">
+                      Semua indikator clear
+                    </p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <p class="text-[11px] text-slate-700">
+                      4 indikator • 4 bukti sah
+                    </p>
+                    <p class="text-[11px] text-slate-500">
+                      4 disetujui • 0 ditolak • 0 perbaikan
+                    </p>
+                  </td>
+                  <td class="px-3 py-2 align-top">
+                    <span class="rounded-full bg-emerald-50 px-2 py-0.5 text-[11px] font-medium text-emerald-700">
+                      Insentif diberikan
+                    </span>
+                  </td>
+                  <td class="px-3 py-2 align-top text-center">
+                    <a
+                      href="#"
+                      class="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-[11px] text-slate-700 hover:border-mabisa-200 hover:bg-mabisa-50/60"
+                    >
+                      👁 Lihat
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="mt-3 text-[11px] text-slate-500">
+            Tombol <strong>“Lihat”</strong> bisa diarahkan ke halaman detail admin, misalnya:
+            <code>/admin/history/{rt_rw_id}/{tahun}/{bulan}</code> yang menampilkan breakdown evidence seperti halaman detail RT, tapi dengan informasi audit/log lebih lengkap.
+          </p>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    // Sidebar mobile
+    var sidebar = document.getElementById('sidebar');
+    var sidebarOpen = document.getElementById('sidebar-open');
+    var sidebarClose = document.getElementById('sidebar-close');
+
+    if (window.innerWidth < 768) {
+      sidebar.classList.add('-translate-x-full');
+    }
+
+    if (sidebarOpen) {
+      sidebarOpen.addEventListener('click', function () {
+        sidebar.classList.remove('-translate-x-full');
+      });
+    }
+    if (sidebarClose) {
+      sidebarClose.addEventListener('click', function () {
+        sidebar.classList.add('-translate-x-full');
+      });
+    }
+
+    // Filter logika
+    var filterTahun = document.getElementById('filterTahun');
+    var filterKecamatan = document.getElementById('filterKecamatan');
+    var filterKelurahan = document.getElementById('filterKelurahan');
+    var filterStatus = document.getElementById('filterStatus');
+    var searchRtRw = document.getElementById('searchRtRw');
+    var historyRows = document.querySelectorAll('#historyBody tr');
+
+    function applyFilters() {
+      var tahun = filterTahun.value;
+      var kec = filterKecamatan.value;
+      var kel = filterKelurahan.value;
+      var st = filterStatus.value;
+      var q = (searchRtRw.value || '').toLowerCase();
+
+      historyRows.forEach(function (row) {
+        var rowTahun = row.getAttribute('data-tahun');
+        var rowKec = row.getAttribute('data-kecamatan');
+        var rowKel = row.getAttribute('data-kelurahan');
+        var rowSt = row.getAttribute('data-status');
+        var rowSearch = (row.getAttribute('data-search') || '').toLowerCase();
+
+        var visible = true;
+
+        if (tahun !== 'all' && rowTahun !== tahun) visible = false;
+        if (kec !== 'all' && rowKec !== kec) visible = false;
+        if (kel !== 'all' && rowKel !== kel) visible = false;
+        if (st !== 'all' && rowSt !== st) visible = false;
+        if (q && !rowSearch.includes(q)) visible = false;
+
+        row.classList.toggle('hidden', !visible);
+      });
+    }
+
+    filterTahun.addEventListener('change', applyFilters);
+    filterKecamatan.addEventListener('change', applyFilters);
+    filterKelurahan.addEventListener('change', applyFilters);
+    filterStatus.addEventListener('change', applyFilters);
+    searchRtRw.addEventListener('input', applyFilters);
+
+    // Inisialisasi
+    applyFilters();
+  </script>
+</body>
+</html>

@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <title>MABISA — Makassar Bukti & Insentif Satu Aplikasi</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="MABISA — Makassar Bukti & Insentif Satu Aplikasi. Platform integrasi data bukti RT/RW untuk verifikasi insentif berbasis kinerja."
+  />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            mabisa: {
+              50: '#fdf5f5',
+              100: '#fae5e6',
+              200: '#f3c7ca',
+              300: '#e89aa0',
+              400: '#d86872',
+              500: '#b1333f',  // maroon utama
+              600: '#8f2633',
+              700: '#6e1d28',
+              800: '#4a151d',
+              900: '#2e0e14',
+            },
+          },
+          boxShadow: {
+            soft: '0 18px 45px rgba(15,23,42,0.08)',
+          },
+          borderRadius: {
+            '3xl': '1.75rem',
+          },
+        },
+      },
+    };
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-900">
+  <!-- Background dekor lembut -->
+  <div class="pointer-events-none fixed inset-0 -z-10">
+    <div class="absolute -top-32 -right-16 h-72 w-72 rounded-full bg-mabisa-100 opacity-70 blur-3xl"></div>
+    <div class="absolute -bottom-32 -left-20 h-80 w-80 rounded-full bg-mabisa-50 opacity-80 blur-3xl"></div>
+  </div>
+
+  <!-- NAVBAR -->
+  <header class="sticky top-0 z-40 border-b border-slate-200 bg-white/90 backdrop-blur-md">
+    <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:py-4">
+      <!-- Logo + title -->
+      <div class="flex items-center gap-3">
+        <div class="flex h-9 w-9 items-center justify-center rounded-2xl bg-mabisa-500 text-white shadow-soft">
+          <span class="text-xs font-semibold tracking-tight">MB</span>
+        </div>
+        <div class="leading-tight">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="text-base font-semibold tracking-tight text-slate-900">
+              MABISA
+            </span>
+            <span class="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wider text-slate-500">
+              Makassar Bukti &amp; Insentif Satu Aplikasi
+            </span>
+          </div>
+          <p class="mt-0.5 text-xs text-slate-500">
+            Platform kinerja RT/RW berbasis bukti &amp; insentif.
+          </p>
+        </div>
+      </div>
+
+      <!-- Nav desktop -->
+      <div class="hidden items-center gap-7 text-sm md:flex">
+        <a href="#about" class="text-slate-600 hover:text-slate-900">Konsep</a>
+        <a href="#fitur" class="text-slate-600 hover:text-slate-900">Fitur</a>
+        <a href="#workflow" class="text-slate-600 hover:text-slate-900">Alur</a>
+        <a href="#manfaat" class="text-slate-600 hover:text-slate-900">Manfaat</a>
+        <a href="#integrasi" class="text-slate-600 hover:text-slate-900">Integrasi</a>
+      </div>
+
+      <!-- CTA desktop -->
+      <div class="hidden items-center gap-3 md:flex">
+        <a
+          href="#contact"
+          class="rounded-xl border border-slate-200 bg-white px-3.5 py-1.5 text-xs font-medium text-slate-700 hover:border-mabisa-200 hover:bg-mabisa-50/60"
+        >
+          Hubungi BRIDA
+        </a>
+        <a
+          href="{{ route('dashboard.home.index') }}"
+          class="rounded-xl bg-mabisa-500 px-4 py-1.5 text-xs font-semibold text-white shadow-soft hover:bg-mabisa-600"
+        >
+          Dashboard
+        </a>
+      </div>
+
+      <!-- Mobile button -->
+      <button
+        id="mobile-menu-button"
+        class="inline-flex items-center rounded-lg border border-slate-200 bg-white p-1.5 text-slate-700 md:hidden"
+        aria-label="Toggle menu"
+      >
+        <svg id="icon-menu" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" class="hidden h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </nav>
+
+    <!-- Mobile nav -->
+    <div id="mobile-menu" class="hidden border-t border-slate-200 bg-white md:hidden">
+      <div class="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-3 text-sm">
+        <a href="#about" class="py-1.5 text-slate-700">Konsep</a>
+        <a href="#fitur" class="py-1.5 text-slate-700">Fitur</a>
+        <a href="#workflow" class="py-1.5 text-slate-700">Alur</a>
+        <a href="#manfaat" class="py-1.5 text-slate-700">Manfaat</a>
+        <a href="#integrasi" class="py-1.5 text-slate-700">Integrasi</a>
+        <div class="mt-2 flex gap-2">
+          <a
+            href="#contact"
+            class="flex-1 rounded-xl border border-slate-200 bg-slate-50 px-3 py-1.5 text-center text-xs font-medium text-slate-700"
+          >
+            Hubungi BRIDA
+          </a>
+          <a
+            href="#demo"
+            class="flex-1 rounded-xl bg-mabisa-500 px-3 py-1.5 text-center text-xs font-semibold text-white"
+          >
+            Demo Konsep
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-6xl px-4 pb-16 pt-8 md:pt-12">
+    <!-- HERO -->
+    <section id="demo" class="grid gap-10 md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] md:items-center">
+      <!-- Left -->
+      <div class="space-y-7">
+        <div class="inline-flex items-center gap-2 rounded-full border border-mabisa-100 bg-mabisa-50 px-3 py-1 text-[11px] font-medium text-mabisa-700">
+          <span class="inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+          <span>🟣 MABISA — Makassar Bukti &amp; Insentif Satu Aplikasi</span>
+        </div>
+
+        <div class="space-y-3">
+          <h1 class="text-3xl font-semibold leading-tight text-slate-900 md:text-4xl">
+            Kinerja RT/RW
+            <span class="block bg-gradient-to-r from-mabisa-600 via-mabisa-500 to-mabisa-400 bg-clip-text text-transparent">
+              tercatat rapi, insentif jadi pasti.
+            </span>
+          </h1>
+          <p class="max-w-xl text-sm leading-relaxed text-slate-600 md:text-base">
+            <strong>MABISA</strong> mengubah bukti yang tercecer di WhatsApp menjadi
+            <strong>database kinerja RT/RW</strong> yang terstruktur. Dari unggah bukti, verifikasi lurah/camat,
+            hingga rekap insentif — semua dalam satu aplikasi.
+          </p>
+        </div>
+
+        <!-- 3 poin utama -->
+        <div class="grid gap-3 text-xs text-slate-700 sm:grid-cols-3">
+          <div class="rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-soft/30">
+            <p class="text-[11px] font-semibold uppercase tracking-wider text-mabisa-600">1 pintu bukti</p>
+            <p class="mt-1">
+              Semua bukti kegiatan RT/RW tersimpan rapi, lengkap dengan foto, lokasi, dan waktu.
+            </p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-soft/30">
+            <p class="text-[11px] font-semibold uppercase tracking-wider text-mabisa-600">Verifikasi jelas</p>
+            <p class="mt-1">
+              Status bukti transparan: menunggu, diterima, atau ditolak, dengan catatan verifikator.
+            </p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-soft/30">
+            <p class="text-[11px] font-semibold uppercase tracking-wider text-mabisa-600">Insentif objektif</p>
+            <p class="mt-1">
+              Skor kinerja otomatis menjadi dasar insentif yang adil dan akuntabel.
+            </p>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="flex flex-wrap items-center gap-3 pt-1">
+          <a
+            href="#fitur"
+            class="inline-flex items-center gap-2 rounded-full bg-mabisa-500 px-5 py-2.5 text-xs font-semibold text-white shadow-soft hover:bg-mabisa-600"
+          >
+            Lihat Fitur Utama
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M5 12h14M13 5l7 7-7 7" />
+            </svg>
+          </a>
+          <button
+            type="button"
+            class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2.5 text-xs font-medium text-slate-700 hover:border-mabisa-200 hover:bg-mabisa-50/60"
+          >
+            Pitch 15 detik
+            <span class="text-[11px] text-slate-500">(untuk presentasi)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Right: visual non-template (step card) -->
+      <div class="relative">
+        <div class="absolute -top-4 -right-4 hidden rounded-2xl bg-white/80 px-3 py-2 text-[11px] text-slate-700 shadow-soft md:flex items-center gap-2 border border-slate-200">
+          <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-mabisa-50 text-mabisa-600 text-xs">
+            24/7
+          </span>
+          <span>Rekam jejak bukti siap diaudit kapan saja.</span>
+        </div>
+
+        <div class="rounded-3xl border border-slate-200 bg-white p-5 shadow-soft">
+          <p class="text-xs font-semibold text-slate-800">
+            Alur sederhana MABISA
+          </p>
+
+          <div class="mt-4 space-y-3 text-xs">
+            <!-- Step 1 -->
+            <div class="flex gap-3 rounded-2xl bg-slate-50 p-3">
+              <div class="mt-0.5 flex h-8 w-8 flex-none items-center justify-center rounded-full bg-mabisa-50 text-mabisa-600">
+                1
+              </div>
+              <div>
+                <p class="font-semibold text-slate-800">RT/RW unggah bukti</p>
+                <p class="mt-0.5 text-slate-600">
+                  Foto kegiatan + lokasi otomatis + laporan singkat + kategori (kebersihan, keamanan, sosial, dll.).
+                </p>
+              </div>
+            </div>
+            <!-- Step 2 -->
+            <div class="flex gap-3 rounded-2xl bg-slate-50 p-3">
+              <div class="mt-0.5 flex h-8 w-8 flex-none items-center justify-center rounded-full bg-mabisa-50 text-mabisa-600">
+                2
+              </div>
+              <div>
+                <p class="font-semibold text-slate-800">Lurah &amp; camat verifikasi</p>
+                <p class="mt-0.5 text-slate-600">
+                  Bukti diberi status: menunggu, diterima, atau ditolak, lengkap dengan catatan koreksi.
+                </p>
+              </div>
+            </div>
+            <!-- Step 3 -->
+            <div class="flex gap-3 rounded-2xl bg-slate-50 p-3">
+              <div class="mt-0.5 flex h-8 w-8 flex-none items-center justify-center rounded-full bg-mabisa-500 text-white">
+                3
+              </div>
+              <div>
+                <p class="font-semibold text-slate-800">Sistem hitung skor &amp; insentif</p>
+                <p class="mt-0.5 text-slate-600">
+                  Skor kinerja otomatis → rekap bulanan → rekap triwulan → kelayakan insentif per RT/RW.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 grid gap-3 text-[11px] md:grid-cols-3">
+            <div class="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2">
+              <p class="text-slate-500">Bukti bulan ini</p>
+              <p class="text-lg font-semibold text-mabisa-600">482</p>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2">
+              <p class="text-slate-500">RT/RW layak insentif</p>
+              <p class="text-lg font-semibold text-emerald-600">87%</p>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2">
+              <p class="text-slate-500">Waktu verifikasi</p>
+              <p class="text-lg font-semibold text-slate-800">lebih singkat</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT / LATAR BELAKANG + TUJUAN -->
+    <section id="about" class="mt-16 space-y-8">
+      <div class="max-w-3xl space-y-3">
+        <h2 class="text-xl font-semibold text-slate-900 md:text-2xl">
+          Kenapa MABISA diperlukan?
+        </h2>
+        <p class="text-sm leading-relaxed text-slate-700">
+          Saat ini, bukti kinerja RT/RW banyak dikirim lewat grup WhatsApp, tercecer, sulit dilacak, dan tidak memiliki
+          <strong>rekam jejak jangka panjang</strong>. MABISA hadir sebagai satu pintu:
+          <span class="font-medium">pengumpulan bukti → verifikasi → penilaian kinerja → insentif.</span>
+        </p>
+      </div>
+
+      <div class="grid gap-5 md:grid-cols-3 text-sm">
+        <div class="rounded-3xl border border-slate-200 bg-white p-4 shadow-soft/40">
+          <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+            Masalah yang terjadi
+          </p>
+          <ul class="mt-2 space-y-1.5 text-slate-700">
+            <li>• Bukti tercecer di banyak grup.</li>
+            <li>• Tidak ada standar verifikasi.</li>
+            <li>• Verifikasi lama dan manual.</li>
+            <li>• Tidak ada database historis kinerja.</li>
+          </ul>
+        </div>
+        <div class="rounded-3xl border border-slate-200 bg-white p-4 shadow-soft/40">
+          <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+            Peran MABISA
+          </p>
+          <ul class="mt-2 space-y-1.5 text-slate-700">
+            <li>• Menyediakan platform resmi &amp; aman.</li>
+            <li>• Menstandarkan proses verifikasi.</li>
+            <li>• Menghasilkan skor kinerja otomatis.</li>
+            <li>• Mencatat semua aktivitas sebagai log.</li>
+          </ul>
+        </div>
+        <div class="rounded-3xl border border-slate-200 bg-white p-4 shadow-soft/40">
+          <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+            Tujuan utama
+          </p>
+          <ul class="mt-2 space-y-1.5 text-slate-700">
+            <li>• Transparansi dan akuntabilitas insentif.</li>
+            <li>• Pengambilan keputusan berbasis data.</li>
+            <li>• Mendukung digitalisasi Pemerintah Kota Makassar.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PENGGUNA UTAMA -->
+    <section class="mt-16 space-y-6">
+      <div class="max-w-3xl space-y-2">
+        <h2 class="text-xl font-semibold text-slate-900 md:text-2xl">
+          Siapa yang memakai MABISA?
+        </h2>
+        <p class="text-sm text-slate-700">
+          MABISA menghubungkan RT/RW, kelurahan, kecamatan, OPD, hingga admin kota dalam satu alur data yang sama.
+        </p>
+      </div>
+
+      <div class="grid gap-4 md:grid-cols-4 text-sm">
+        <div class="rounded-2xl border border-slate-200 bg-white p-4">
+          <p class="text-[11px] font-semibold uppercase tracking-wider text-mabisa-600">
+            RT/RW
+          </p>
+          <p class="mt-1 font-semibold text-slate-900">Pengunggah bukti</p>
+          <p class="mt-1 text-slate-700">
+            Mengirim bukti kegiatan dan laporan singkat sebagai dasar penilaian kinerja.
+          </p>
+        </div>
+        <div class="rounded-2xl border border-slate-200 bg-white p-4">
+          <p class="text-[11px] font-semibold uppercase tracking-wider text-mabisa-600">
+            Lurah
+          </p>
+          <p class="mt-1 font-semibold text-slate-900">Verifikator utama</p>
+          <p class="mt-1 text-slate-700">
+            Memeriksa dan memutuskan kelayakan bukti di tingkat kelurahan.
+          </p>
+        </div>
+        <div class="rounded-2xl border border-slate-200 bg-white p-4">
+          <p class="text-[11px] font-semibold uppercase tracking-wider text-mabisa-600">
+            Camat
+          </p>
+          <p class="mt-1 font-semibold text-slate-900">Evaluator wilayah</p>
+          <p class="mt-1 text-slate-700">
+            Melihat rekap per kelurahan dan memberi penilaian akhir.
+          </p>
+        </div>
+        <div class="rounded-2xl border border-slate-200 bg-white p-4">
+          <p class="text-[11px] font-semibold uppercase tracking-wider text-mabisa-600">
+            OPD &amp; Admin Kota
+          </p>
+          <p class="mt-1 font-semibold text-slate-900">Pengelola data</p>
+          <p class="mt-1 text-slate-700">
+            Mengelola data master, audit, dan laporan insentif kota.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FITUR UTAMA -->
+    <section id="fitur" class="mt-16 space-y-8">
+      <div class="max-w-3xl space-y-2">
+        <h2 class="text-xl font-semibold text-slate-900 md:text-2xl">
+          Fitur utama MABISA
+        </h2>
+        <p class="text-sm text-slate-700">
+          Dirancang agar alur kerja RT/RW sampai Pemerintah Kota jelas, singkat, dan dapat dilacak.
+        </p>
+      </div>
+
+      <div class="grid gap-5 md:grid-cols-3 text-sm">
+        <!-- 1 -->
+        <div class="rounded-3xl border border-slate-200 bg-white p-4 shadow-soft/40">
+          <p class="text-[11px] font-semibold uppercase tracking-wider text-mabisa-600">
+            1. Upload bukti kegiatan
+          </p>
+          <ul class="mt-2 space-y-1.5 text-slate-700">
+            <li>• Foto kegiatan.</li>
+            <li>• Form laporan singkat.</li>
+            <li>• Lokasi GPS &amp; timestamp otomatis.</li>
+            <li>• Kategori kegiatan yang seragam.</li>
+          </ul>
+        </div>
+        <!-- 2 -->
+        <div class="rounded-3xl border border-slate-200 bg-white p-4 shadow-soft/40">
+          <p class="text-[11px] font-semibold uppercase tracking-wider text-mabisa-600">
+            2. Dashboard verifikasi
+          </p>
+          <ul class="mt-2 space-y-1.5 text-slate-700">
+            <li>• Status: menunggu, diterima, ditolak.</li>
+            <li>• Catatan verifikator.</li>
+            <li>• Riwayat koreksi bukti.</li>
+            <li>• Filter per waktu, jenis kegiatan, RT/RW.</li>
+          </ul>
+        </div>
+        <!-- 3 -->
+        <div class="rounded-3xl border border-slate-200 bg-white p-4 shadow-soft/40">
+          <p class="text-[11px] font-semibold uppercase tracking-wider text-mabisa-600">
+            3. Penilaian otomatis
+          </p>
+          <ul class="mt-2 space-y-1.5 text-slate-700">
+            <li>• Skor berdasarkan jumlah &amp; kualitas bukti.</li>
+            <li>• Algoritma penilaian seragam.</li>
+            <li>• Rekap bulanan &amp; triwulan otomatis.</li>
+          </ul>
+        </div>
+        <!-- 4 -->
+        <div class="rounded-3xl border border-slate-200 bg-white p-4 shadow-soft/40">
+          <p class="text-[11px] font-semibold uppercase tracking-wider text-mabisa-600">
+            4. Rekap insentif
+          </p>
+          <ul class="mt-2 space-y-1.5 text-slate-700">
+            <li>• Kelayakan insentif per RT/RW.</li>
+            <li>• Besaran insentif terdokumentasi.</li>
+            <li>• Riwayat pembayaran.</li>
+            <li>• Laporan PDF otomatis.</li>
+          </ul>
+        </div>
+        <!-- 5 -->
+        <div class="rounded-3xl border border-slate-200 bg-white p-4 shadow-soft/40">
+          <p class="text-[11px] font-semibold uppercase tracking-wider text-mabisa-600">
+            5. Arsip bukti per RT/RW
+          </p>
+          <ul class="mt-2 space-y-1.5 text-slate-700">
+            <li>• Disimpan jangka panjang (cloud).</li>
+            <li>• Bisa ditelusuri per bulan/per kegiatan.</li>
+            <li>• Data siap untuk audit.</li>
+          </ul>
+        </div>
+        <!-- 6 -->
+        <div class="rounded-3xl border border-slate-200 bg-white p-4 shadow-soft/40">
+          <p class="text-[11px] font-semibold uppercase tracking-wider text-mabisa-600">
+            6. Notifikasi real-time
+          </p>
+          <ul class="mt-2 space-y-1.5 text-slate-700">
+            <li>• Pemberitahuan bukti diterima/ditolak.</li>
+            <li>• Alasan penolakan.</li>
+            <li>• Pengumuman insentif.</li>
+            <li>• Pengingat batas waktu pengumpulan.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORKFLOW -->
+    <section id="workflow" class="mt-16 space-y-6">
+      <div class="max-w-3xl space-y-2">
+        <h2 class="text-xl font-semibold text-slate-900 md:text-2xl">
+          Alur kerja MABISA dalam 6 langkah
+        </h2>
+        <p class="text-sm text-slate-700">
+          Dibuat sederhana agar mudah dijelaskan ke pimpinan, RT/RW, maupun untuk bahan presentasi.
+        </p>
+      </div>
+
+      <ol class="space-y-4 text-sm">
+        <li class="flex gap-3 rounded-2xl border border-slate-200 bg-white p-4">
+          <span class="mt-0.5 flex h-7 w-7 flex-none items-center justify-center rounded-full bg-mabisa-50 text-xs font-semibold text-mabisa-700">
+            1
+          </span>
+          <div>
+            <p class="font-semibold text-slate-900">RT/RW upload bukti</p>
+            <p class="mt-1 text-slate-700 text-xs">
+              Bukti diunggah melalui form: foto, lokasi, waktu, dan laporan singkat.
+            </p>
+          </div>
+        </li>
+        <li class="flex gap-3 rounded-2xl border border-slate-200 bg-white p-4">
+          <span class="mt-0.5 flex h-7 w-7 flex-none items-center justify-center rounded-full bg-mabisa-50 text-xs font-semibold text-mabisa-700">
+            2
+          </span>
+          <div>
+            <p class="font-semibold text-slate-900">Lurah memverifikasi</p>
+            <p class="mt-1 text-slate-700 text-xs">
+              Bukti ditinjau dan diberi status: diterima atau ditolak + catatan koreksi.
+            </p>
+          </div>
+        </li>
+        <li class="flex gap-3 rounded-2xl border border-slate-200 bg-white p-4">
+          <span class="mt-0.5 flex h-7 w-7 flex-none items-center justify-center rounded-full bg-mabisa-50 text-xs font-semibold text-mabisa-700">
+            3
+          </span>
+          <div>
+            <p class="font-semibold text-slate-900">Camat evaluasi wilayah (opsional)</p>
+            <p class="mt-1 text-slate-700 text-xs">
+              Camat melihat rekap kelurahan dan memberi penilaian akhir bila diperlukan.
+            </p>
+          </div>
+        </li>
+        <li class="flex gap-3 rounded-2xl border border-slate-200 bg-white p-4">
+          <span class="mt-0.5 flex h-7 w-7 flex-none items-center justify-center rounded-full bg-mabisa-50 text-xs font-semibold text-mabisa-700">
+            4
+          </span>
+          <div>
+            <p class="font-semibold text-slate-900">Sistem menghitung skor</p>
+            <p class="mt-1 text-slate-700 text-xs">
+              Algoritma penilaian otomatis menyusun skor kinerja berdasarkan bukti yang diterima.
+            </p>
+          </div>
+        </li>
+        <li class="flex gap-3 rounded-2xl border border-slate-200 bg-white p-4">
+          <span class="mt-0.5 flex h-7 w-7 flex-none items-center justify-center rounded-full bg-mabisa-50 text-xs font-semibold text-mabisa-700">
+            5
+          </span>
+          <div>
+            <p class="font-semibold text-slate-900">Kelayakan insentif terbentuk</p>
+            <p class="mt-1 text-slate-700 text-xs">
+              Daftar RT/RW yang layak insentif muncul otomatis berdasarkan skor.
+            </p>
+          </div>
+        </li>
+        <li class="flex gap-3 rounded-2xl border border-slate-200 bg-white p-4">
+          <span class="mt-0.5 flex h-7 w-7 flex-none items-center justify-center rounded-full bg-mabisa-500 text-xs font-semibold text-white">
+            6
+          </span>
+          <div>
+            <p class="font-semibold text-slate-900">Rekap &amp; arsip digital</p>
+            <p class="mt-1 text-slate-700 text-xs">
+              Admin kota menerbitkan rekap berkala, sementara semua data tersimpan sebagai rekam jejak daring.
+            </p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- MANFAAT -->
+    <section id="manfaat" class="mt-16 space-y-6">
+      <div class="max-w-3xl space-y-2">
+        <h2 class="text-xl font-semibold text-slate-900 md:text-2xl">
+          Manfaat untuk semua pihak
+        </h2>
+        <p class="text-sm text-slate-700">
+          Setiap peran merasakan manfaat yang jelas, bukan hanya “aplikasi baru”.
+        </p>
+      </div>
+
+      <div class="grid gap-5 md:grid-cols-3 text-sm">
+        <div class="rounded-3xl border border-slate-200 bg-white p-4">
+          <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">Untuk RT/RW</p>
+          <ul class="mt-2 space-y-1.5 text-slate-700">
+            <li>• Tidak perlu kirim bukti ke banyak grup.</li>
+            <li>• Bukti aman, mudah dilacak kembali.</li>
+            <li>• Kelayakan insentif lebih jelas.</li>
+          </ul>
+        </div>
+        <div class="rounded-3xl border border-slate-200 bg-white p-4">
+          <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">Untuk lurah/camat</p>
+          <ul class="mt-2 space-y-1.5 text-slate-700">
+            <li>• Rekap bukti per wilayah otomatis.</li>
+            <li>• Verifikasi terukur, tanpa tumpukan berkas.</li>
+            <li>• Mengurangi konflik data.</li>
+          </ul>
+        </div>
+        <div class="rounded-3xl border border-slate-200 bg-white p-4">
+          <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">Untuk Pemkot</p>
+          <ul class="mt-2 space-y-1.5 text-slate-700">
+            <li>• Data satu pintu, siap dianalisis.</li>
+            <li>• Transparansi &amp; akuntabilitas meningkat.</li>
+            <li>• Mendukung digitalisasi pemerintahan.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+   
+
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-slate-200 bg-white/80">
+    <div class="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-4 text-[11px] text-slate-500 md:flex-row md:items-center md:justify-between">
+      <p>
+        © <span id="year"></span> MABISA — Makassar Bukti &amp; Insentif Satu Aplikasi
+      </p>
+      <p class="flex flex-wrap gap-1">
+        Bagian dari ekosistem
+        <span class="font-semibold text-slate-800">SIGAP BRIDA</span> —
+        Badan Riset dan Inovasi Daerah Kota Makassar.
+      </p>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script>
+    // Tahun otomatis
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    const mobileBtn = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const iconMenu = document.getElementById('icon-menu');
+    const iconClose = document.getElementById('icon-close');
+
+    if (mobileBtn) {
+      mobileBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        iconMenu.classList.toggle('hidden');
+        iconClose.classList.toggle('hidden');
+      });
+    }
+
+    // FAQ accordion
+    const faqButtons = document.querySelectorAll('.faq-toggle');
+    faqButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-target');
+        const target = document.getElementById(targetId);
+        const icon = btn.querySelector('.faq-icon');
+
+        if (!target) return;
+
+        const isHidden = target.classList.contains('hidden');
+
+        // Tutup semua
+        document.querySelectorAll('.faq-content').forEach((el) => el.classList.add('hidden'));
+        document.querySelectorAll('.faq-icon').forEach((ic) => (ic.textContent = '+'));
+
+        // Toggle yang dipilih
+        if (isHidden) {
+          target.classList.remove('hidden');
+          icon.textContent = '−';
+        } else {
+          target.classList.add('hidden');
+          icon.textContent = '+';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
